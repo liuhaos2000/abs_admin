@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TUserAddressMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TUserAddress" >
+    <id column="open_id" property="openId" jdbcType="VARCHAR" />
+    <id column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="region_name1" property="regionName1" jdbcType="VARCHAR" />
+    <result column="region_name2" property="regionName2" jdbcType="VARCHAR" />
+    <result column="region_name3" property="regionName3" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="post" property="post" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    open_id, address_id, country, region_name1, region_name2, region_name3, address_detail, 
+    name, tel, post, del_flg, c_date, c_user, u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TUserAddressKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_address
+    where open_id = #{openId,jdbcType=VARCHAR}
+      and address_id = #{addressId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TUserAddressKey" >
+    delete from t_user_address
+    where open_id = #{openId,jdbcType=VARCHAR}
+      and address_id = #{addressId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TUserAddress" >
+    insert into t_user_address (open_id, address_id, country, 
+      region_name1, region_name2, region_name3, 
+      address_detail, name, tel, 
+      post, del_flg, c_date, 
+      c_user, u_date, u_user
+      )
+    values (#{openId,jdbcType=VARCHAR}, #{addressId,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, 
+      #{regionName1,jdbcType=VARCHAR}, #{regionName2,jdbcType=VARCHAR}, #{regionName3,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{post,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TUserAddress" >
+    insert into t_user_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="regionName1 != null" >
+        region_name1,
+      </if>
+      <if test="regionName2 != null" >
+        region_name2,
+      </if>
+      <if test="regionName3 != null" >
+        region_name3,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName1 != null" >
+        #{regionName1,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName2 != null" >
+        #{regionName2,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName3 != null" >
+        #{regionName3,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TUserAddress" >
+    update t_user_address
+    <set >
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName1 != null" >
+        region_name1 = #{regionName1,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName2 != null" >
+        region_name2 = #{regionName2,jdbcType=VARCHAR},
+      </if>
+      <if test="regionName3 != null" >
+        region_name3 = #{regionName3,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where open_id = #{openId,jdbcType=VARCHAR}
+      and address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TUserAddress" >
+    update t_user_address
+    set country = #{country,jdbcType=VARCHAR},
+      region_name1 = #{regionName1,jdbcType=VARCHAR},
+      region_name2 = #{regionName2,jdbcType=VARCHAR},
+      region_name3 = #{regionName3,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where open_id = #{openId,jdbcType=VARCHAR}
+      and address_id = #{addressId,jdbcType=INTEGER}
+  </update>
+  <select id="getUserAddress" resultType="map" parameterType="java.lang.String" >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{openId}
+            order by t1.del_flg DESC,t1.address_id DESC
+  </select>
+  <select id="getUserAddressInsert" resultType="map" parameterType="java.lang.String" >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{openId}
+            order by t1.address_id DESC LIMIT 0,1
+  </select>
+  <select id="getUserAddressUpdate" resultType="map"  >
+            select 
+               t1.open_id,t1.address_id,t1.country,t1.region_name1,
+							 t2.region_name as adname1,t1.region_name2,t3.region_name as adname2,
+               t1.region_name3,t4.region_name as adname3,t1.address_detail,t1.
+               name,tel,t1.post,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user
+            from t_user_address t1 LEFT OUTER JOIN t_region t2 ON t1.region_name1=t2.region_id
+																	 LEFT OUTER JOIN t_region t3 ON t1.region_name2=t3.region_id
+																	 LEFT OUTER JOIN t_region t4 ON t1.region_name3=t4.region_id
+            where t1.open_id = #{param1}
+            	and t1.address_id= #{param2}
+  </select>
+    <insert id="insertAddress" parameterType="com.abs.mobile.domain.TUserAddress" >
+      insert into t_user_address 
+   			 values (#{openId,jdbcType=VARCHAR}, 
+						ifnull((select max(t1.address_id)+1 
+										from t_user_address t1 
+										where t1.open_id=#{openId,jdbcType=VARCHAR} 
+										group by t1.open_id),1), 
+						#{country,jdbcType=VARCHAR}, 
+      					#{regionName1,jdbcType=VARCHAR},
+      					#{regionName2,jdbcType=VARCHAR}, 
+      					#{regionName3,jdbcType=VARCHAR}, 
+      					#{addressDetail,jdbcType=VARCHAR}, 
+      					#{name,jdbcType=VARCHAR}, 
+      					#{tel,jdbcType=VARCHAR}, 
+      					#{post,jdbcType=VARCHAR}, 
+      					#{delFlg,jdbcType=CHAR}, 
+      					#{cDate,jdbcType=TIMESTAMP}, 
+      					#{cUser,jdbcType=VARCHAR}, 
+      					#{uDate,jdbcType=TIMESTAMP}, 
+      					#{uUser,jdbcType=VARCHAR}
+      		)
+    </insert>
+    <update id="updAddressMoren" parameterType="java.lang.String" >
+    	update t_user_address
+    		set del_flg='0'
+		where open_id=#{openId}
+	</update>
+</mapper>

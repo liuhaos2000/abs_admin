@@ -1,0 +1,56 @@
+select 
+    t2.item_name		
+    ,t1.item_id
+    ,t1.item_guige
+    ,t1.item_yanse
+    ,t1.guige_text
+    ,t1.yanse_text
+    ,t1.shuliang
+    ,t1.price
+    ,t1.price_huiyuan
+    ,t1.price_huodong
+    ,t1.huodong_date
+    ,t1.huodong_flg
+    ,t1.zhongliang
+    ,t3.path
+FROM 
+	t_item_detail t1  
+		inner JOIN t_item t2
+			on t1.item_id = t2.item_id
+		inner JOIN (
+					SELECT
+						t31.item_id,
+						t31.picture_id,
+						t31.path
+					FROM 
+						t_item_picture t31
+					WHERE 
+						t31.picture_type = '3'
+						and t31.del_flg = '0'
+						and not EXISTS (
+										select 
+												t311.item_id
+										FROM
+												t_item_picture t311
+										WHERE
+												t311.item_id = t31.item_id
+												and t311.picture_type = '3'
+												and t311.del_flg = '0'
+												and t311.picture_id  < t31.picture_id
+                                       )
+					) t3 on t1.item_id = t3.item_id
+
+WHERE
+    t1.del_flg='0'
+	and t1.huodong_flg='5'
+	and not EXISTS(
+					select 
+						t12.item_id 
+					FROM 
+						t_item_detail t12
+					WHERE
+						t1.item_id = t12.item_id
+						and t12.del_flg='0'
+						and (t12.item_yanse < t1.item_yanse
+							 or t12.item_guige < t1.item_guige)	
+				)

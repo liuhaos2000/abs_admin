@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TItemDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemDetail" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
+    <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
+    <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
+    <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
+    <result column="shuliang" property="shuliang" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="price_huiyuan" property="priceHuiyuan" jdbcType="DECIMAL" />
+    <result column="price_huodong" property="priceHuodong" jdbcType="DECIMAL" />
+    <result column="huodong_date" property="huodongDate" jdbcType="DATE" />
+    <result column="huodong_flg" property="huodongFlg" jdbcType="VARCHAR" />
+    <result column="zhongliang" property="zhongliang" jdbcType="DECIMAL" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, price, price_huiyuan, 
+    price_huodong, huodong_date, huodong_flg, zhongliang, del_flg, c_date, c_user, u_date, 
+    u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TItemDetailKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetailKey" >
+    delete from t_item_detail
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemDetail" >
+    insert into t_item_detail (item_id, item_guige, item_yanse, 
+      guige_text, yanse_text, shuliang, 
+      price, price_huiyuan, price_huodong, 
+      huodong_date, huodong_flg, zhongliang, 
+      del_flg, c_date, c_user, 
+      u_date, u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, 
+      #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{priceHuiyuan,jdbcType=DECIMAL}, #{priceHuodong,jdbcType=DECIMAL}, 
+      #{huodongDate,jdbcType=DATE}, #{huodongFlg,jdbcType=VARCHAR}, #{zhongliang,jdbcType=DECIMAL}, 
+      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
+      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail" >
+    insert into t_item_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemGuige != null" >
+        item_guige,
+      </if>
+      <if test="itemYanse != null" >
+        item_yanse,
+      </if>
+      <if test="guigeText != null" >
+        guige_text,
+      </if>
+      <if test="yanseText != null" >
+        yanse_text,
+      </if>
+      <if test="shuliang != null" >
+        shuliang,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="priceHuiyuan != null" >
+        price_huiyuan,
+      </if>
+      <if test="priceHuodong != null" >
+        price_huodong,
+      </if>
+      <if test="huodongDate != null" >
+        huodong_date,
+      </if>
+      <if test="huodongFlg != null" >
+        huodong_flg,
+      </if>
+      <if test="zhongliang != null" >
+        zhongliang,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemGuige != null" >
+        #{itemGuige,jdbcType=INTEGER},
+      </if>
+      <if test="itemYanse != null" >
+        #{itemYanse,jdbcType=INTEGER},
+      </if>
+      <if test="guigeText != null" >
+        #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null" >
+        #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null" >
+        #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null" >
+        #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null" >
+        #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null" >
+        #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null" >
+        #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null" >
+        #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemDetail" >
+    update t_item_detail
+    <set >
+      <if test="guigeText != null" >
+        guige_text = #{guigeText,jdbcType=VARCHAR},
+      </if>
+      <if test="yanseText != null" >
+        yanse_text = #{yanseText,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null" >
+        shuliang = #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuiyuan != null" >
+        price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      </if>
+      <if test="priceHuodong != null" >
+        price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      </if>
+      <if test="huodongDate != null" >
+        huodong_date = #{huodongDate,jdbcType=DATE},
+      </if>
+      <if test="huodongFlg != null" >
+        huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhongliang != null" >
+        zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemDetail" >
+    update t_item_detail
+    set guige_text = #{guigeText,jdbcType=VARCHAR},
+      yanse_text = #{yanseText,jdbcType=VARCHAR},
+      shuliang = #{shuliang,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      price_huiyuan = #{priceHuiyuan,jdbcType=DECIMAL},
+      price_huodong = #{priceHuodong,jdbcType=DECIMAL},
+      huodong_date = #{huodongDate,jdbcType=DATE},
+      huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
+      zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+  </update>
+  <select id="getItemDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_detail
+    where item_id = #{itemId}
+    	 and del_flg='0'
+  </select>
+  <select id="getItemXinghao" resultType="map" parameterType="java.lang.String" >
+  	select  DISTINCT
+ 		t1.item_guige,
+ 		t1.guige_text
+    from t_item_detail t1
+    where t1.item_id = #{itemId}
+    	and t1.item_guige!='0'
+  </select>
+  <select id="getItemYanse" resultType="map" parameterType="java.lang.String" >
+	select  DISTINCT
+ 		t1.item_yanse,
+ 		t1.yanse_text
+    from t_item_detail t1
+    where t1.item_id = #{itemId}
+    	and t1.item_yanse!='0'
+  </select>
+  <select id="getItemSalePrice" resultType="map">
+    SELECT 
+        CASE 
+            WHEN t1.huodong_flg = '0' THEN t1.price 
+            WHEN t1.huodong_flg = '1' THEN t1.price_huiyuan 
+            WHEN t1.huodong_flg = '7' THEN t1.price_huodong 
+            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.price_huodong 
+            ELSE t1.price_huiyuan 
+        END AS sale_price,
+        CASE 
+            WHEN t1.huodong_flg = '0' THEN  t1.huodong_flg 
+            WHEN t1.huodong_flg = '1' THEN  t1.huodong_flg 
+            WHEN t1.huodong_flg = '7' THEN  t1.huodong_flg 
+            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.huodong_flg 
+            ELSE '1'
+        END AS end_price_type
+          ,item_id, item_guige, item_yanse, guige_text
+            , yanse_text, shuliang, price, price_huiyuan, price_huodong
+            , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+            , c_user, u_date, u_user
+    FROM t_item_detail t1
+    WHERE t1.item_id = #{param1}
+            AND t1.item_guige = #{param2}
+            AND t1.item_yanse = #{param3}
+  </select>
+  <select id="getItemPriceFromTo" resultType="map"  parameterType="java.lang.String">
+        Select 
+            t11.item_id,
+            min(t11.sale_price) as min_sale_price,
+            max(t11.sale_price) as max_sale_price,
+            concat(min(t11.sale_price),' - ',max(t11.sale_price)) as price_from_to
+        from
+            (
+                SELECT 
+                CASE 
+                    WHEN t111.huodong_flg = '0' THEN t111.price 
+                    WHEN t111.huodong_flg = '1' THEN t111.price_huiyuan 
+                    WHEN t111.huodong_flg = '7' THEN t111.price_huodong 
+                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.price_huodong 
+                    ELSE t111.price_huiyuan 
+                END AS sale_price,
+                CASE 
+                    WHEN t111.huodong_flg = '0' THEN  t111.huodong_flg 
+                    WHEN t111.huodong_flg = '1' THEN  t111.huodong_flg 
+                    WHEN t111.huodong_flg = '7' THEN  t111.huodong_flg 
+                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.huodong_flg 
+                    ELSE '1'
+                END AS end_price_type
+                  ,item_id, item_guige, item_yanse, guige_text
+                    , yanse_text, shuliang, price, price_huiyuan, price_huodong
+                    , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+                    , c_user, u_date, u_user
+                FROM t_item_detail t111
+                WHERE t111.item_id = #{itemId}
+            ) t11
+        group by
+        t11.item_id
+  </select>
+</mapper>

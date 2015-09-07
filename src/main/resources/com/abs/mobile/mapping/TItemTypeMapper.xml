@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TItemTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemType" >
+    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="prent_id" property="prentId" jdbcType="INTEGER" />
+    <result column="type_order" property="typeOrder" jdbcType="INTEGER" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    type_id, name, prent_id, type_order, del_flg, c_date, c_user, u_date, u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_item_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemType" >
+    insert into t_item_type (type_id, name, prent_id, 
+      type_order, del_flg, c_date, 
+      c_user, u_date, u_user
+      )
+    values (#{typeId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{prentId,jdbcType=INTEGER}, 
+      #{typeOrder,jdbcType=INTEGER}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemType" >
+    insert into t_item_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="prentId != null" >
+        prent_id,
+      </if>
+      <if test="typeOrder != null" >
+        type_order,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="prentId != null" >
+        #{prentId,jdbcType=INTEGER},
+      </if>
+      <if test="typeOrder != null" >
+        #{typeOrder,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemType" >
+    update t_item_type
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="prentId != null" >
+        prent_id = #{prentId,jdbcType=INTEGER},
+      </if>
+      <if test="typeOrder != null" >
+        type_order = #{typeOrder,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemType" >
+    update t_item_type
+    set name = #{name,jdbcType=VARCHAR},
+      prent_id = #{prentId,jdbcType=INTEGER},
+      type_order = #{typeOrder,jdbcType=INTEGER},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  <!-- 查找父类型 -->
+  <select id="getTypePrent" resultMap="BaseResultMap"  >
+    select 
+        <include refid="Base_Column_List" />
+    from t_item_type
+    where prent_id='-1'
+          and del_flg='0'
+  </select>
+  <!-- 查找子类型2级 -->
+  <select id="getTypeLevel2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+        <include refid="Base_Column_List" />
+    from t_item_type
+    where prent_id= #{prentId,jdbcType=VARCHAR}
+          and del_flg='0'
+  </select>
+  
+</mapper>

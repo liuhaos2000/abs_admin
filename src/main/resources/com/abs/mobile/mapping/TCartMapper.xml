@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TCartMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TCart" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
+    <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
+    <id column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="shuliang" property="shuliang" jdbcType="INTEGER" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, item_guige, item_yanse, open_id, shuliang, del_flg, c_date, c_user, u_date, 
+    u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TCartKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cart
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TCartKey" >
+    delete from t_cart
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and open_id = #{openId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TCart" >
+    insert into t_cart (item_id, item_guige, item_yanse, 
+      open_id, shuliang, del_flg, 
+      c_date, c_user, u_date, 
+      u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, 
+      #{openId,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TCart" >
+    insert into t_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemGuige != null" >
+        item_guige,
+      </if>
+      <if test="itemYanse != null" >
+        item_yanse,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="shuliang != null" >
+        shuliang,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemGuige != null" >
+        #{itemGuige,jdbcType=INTEGER},
+      </if>
+      <if test="itemYanse != null" >
+        #{itemYanse,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuliang != null" >
+        #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TCart" >
+    update t_cart
+    <set >
+      <if test="shuliang != null" >
+        shuliang = #{shuliang,jdbcType=INTEGER},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TCart" >
+    update t_cart
+    set shuliang = #{shuliang,jdbcType=INTEGER},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and item_guige = #{itemGuige,jdbcType=INTEGER}
+      and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getCount" resultType="long" parameterType="java.lang.String" >
+  	select  count(1) as count
+	from t_cart 
+	WHERE
+   		open_id =#{openId}
+  </select>
+  <select id="getItemFromCart" resultType="map" parameterType="java.lang.String" >
+            select  
+                    t1.item_id,t1.item_guige,t1.item_yanse,t1.open_id,t1.shuliang,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user,t2.item_name,
+                    t3.end_price_type,t3.sale_price,t3.item_guige,t3.guige_text,t3.item_yanse,t3.yanse_text,t4.path,t3.shuliang as kucun
+            from t_cart t1 
+                            INNER JOIN t_item t2 
+                                on t1.item_id=t2.item_id 
+                            INNER JOIN (
+                                SELECT 
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN t31.price 
+                                        WHEN t31.huodong_flg = '1' THEN t31.price_huiyuan 
+                                        WHEN t31.huodong_flg = '7' THEN t31.price_huodong 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.price_huodong 
+                                        ELSE t31.price_huiyuan 
+                                    END AS sale_price,
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '1' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '7' THEN  t31.huodong_flg 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.huodong_flg 
+                                        ELSE '1'
+                                    END AS end_price_type
+                                      ,item_id, item_guige, item_yanse, guige_text
+                                        , yanse_text, shuliang, price, price_huiyuan, price_huodong
+                                        , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+                                        , c_user, u_date, u_user
+                                FROM t_item_detail t31
+                                                ) t3 on t1.item_id=t3.item_id and t1.item_guige=t3.item_guige and t1.item_yanse=t3.item_yanse
+                                    INNER JOIN t_item_picture t4
+                                                on t1.item_id = t4.item_id
+                                                
+            
+                where 
+                         t4.picture_type='3'
+                         and t4.del_flg='0'
+                         and t1.open_id=#{openId}
+                         and t2.del_flg='0'
+                         and t2.shangjia_flg='1'
+
+
+  </select>
+  <sql id="getItemFromCartWhitYoufeiSQL" >
+                    select  
+                    t1.item_id,t1.item_guige,t1.item_yanse,t1.open_id,t1.shuliang,t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user,t2.item_name,
+                    t3.end_price_type,t3.sale_price,t3.guige_text,t3.yanse_text,t4.path,t3.shuliang as kucun,t2.shangjia_flg,
+                                        t2.baoyou_flg,t2.`owner`,t2.from_area,t6.region_name as from_name,
+                                        #{param2} as to_area,t7.region_name as to_name,t5.price as youfei,t5.price_plus as youfei_plus,
+                                        t8.zhongliangTotal,
+
+                                               CASE
+                                                            WHEN t2.baoyou_flg='1' THEN 0
+                                                            ELSE t5.price + ceil((t8.zhongliangTotal-1))*t5.price_plus
+                                                     END AS group_youfei
+            from t_cart t1 
+                            INNER JOIN t_item t2 
+                                on t1.item_id=t2.item_id 
+                            INNER JOIN (
+                                SELECT 
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN t31.price 
+                                        WHEN t31.huodong_flg = '1' THEN t31.price_huiyuan 
+                                        WHEN t31.huodong_flg = '7' THEN t31.price_huodong 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.price_huodong 
+                                        ELSE t31.price_huiyuan 
+                                    END AS sale_price,
+                                    CASE 
+                                        WHEN t31.huodong_flg = '0' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '1' THEN  t31.huodong_flg 
+                                        WHEN t31.huodong_flg = '7' THEN  t31.huodong_flg 
+                                        WHEN DATE_FORMAT(t31.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t31.huodong_flg 
+                                        ELSE '1'
+                                    END AS end_price_type
+                                      ,item_id, item_guige, item_yanse, guige_text
+                                        , yanse_text, shuliang, price, price_huiyuan, price_huodong
+                                        , huodong_date, huodong_flg, zhongliang, del_flg, c_date
+                                        , c_user, u_date, u_user
+                                FROM t_item_detail t31
+                                                ) t3 on t1.item_id=t3.item_id and t1.item_guige=t3.item_guige and t1.item_yanse=t3.item_yanse
+                                    INNER JOIN t_item_picture t4
+                                                on t1.item_id = t4.item_id
+                                                                        LEFT OUTER JOIN t_wuliu t5 
+                                                                                                on t5.from_area = t2.from_area 
+                                                                                                and t5.to_area = #{param2}
+                                                                        left outer join t_region t6 on t6.region_id = t2.from_area
+                                                                        left outer join t_region t7 on t7.region_id = t5.to_area
+                                    left outer join (
+
+                                                    SELECT 
+                                                    t21.`owner`,t21.from_area,sum(t11.shuliang*t31.zhongliang) as zhongliangTotal
+                                                             FROM t_cart t11
+                                                             INNER JOIN t_item t21 ON t11.item_id =t21.item_id
+                                                             INNER JOIN t_item_detail t31 ON t11.item_id =t31.item_id
+                                                                                            AND t11.item_guige=t31.item_guige
+                                                                                            AND t11.item_yanse=t31.item_yanse
+                                                             WHERE t11.open_id=#{param1}
+                                                                                 and t21.baoyou_flg!='1'
+                                                                     GROUP BY
+                                                                                 t21.`owner`
+                                                                                 ,t21.from_area
+                                                                        )   t8    on t2.`owner` = t8.`owner` and t2.from_area =t8.from_area     
+            
+                where 
+                         t4.picture_type='3'
+                         and t1.open_id=#{param1}
+                         and t1.del_flg='1'
+  </sql>
+  <select id="getItemFromCartWhitYoufei" resultType="map" >
+        <include refid="getItemFromCartWhitYoufeiSQL" />
+   </select>
+     <select id="getItemFromCartTotalPrice" resultType="map" >
+        select 
+            sum(ta.sale_price*ta.shuliang) as item_total_price
+        FROM
+            (
+                <include refid="getItemFromCartWhitYoufeiSQL" />
+            ) ta
+   </select>
+   <select id="getItemFromCartTotalYoufei" resultType="map" >
+
+            SELECT
+            SUM(tb.group_youfei) as youfei_total
+            FROM
+            (
+            select DISTINCT
+            ta.`owner`,
+            ta.from_area,
+            ta.group_youfei
+            FROM
+            (
+                <include refid="getItemFromCartWhitYoufeiSQL" />
+            ) ta
+            ) tb
+   </select>
+</mapper>
