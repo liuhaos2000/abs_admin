@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TItemPictureMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TItemPicture" >
+    <id column="item_id" property="itemId" jdbcType="INTEGER" />
+    <id column="picture_id" property="pictureId" jdbcType="INTEGER" />
+    <result column="picture_text" property="pictureText" jdbcType="VARCHAR" />
+    <result column="picture_type" property="pictureType" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="del_flg" property="delFlg" jdbcType="CHAR" />
+    <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
+    <result column="c_user" property="cUser" jdbcType="VARCHAR" />
+    <result column="u_date" property="uDate" jdbcType="TIMESTAMP" />
+    <result column="u_user" property="uUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    item_id, picture_id, picture_text, picture_type, path, del_flg, c_date, c_user, u_date, 
+    u_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TItemPictureKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_picture
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and picture_id = #{pictureId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TItemPictureKey" >
+    delete from t_item_picture
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and picture_id = #{pictureId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TItemPicture" >
+    insert into t_item_picture (item_id, picture_id, picture_text, 
+      picture_type, path, del_flg, 
+      c_date, c_user, u_date, 
+      u_user)
+    values (#{itemId,jdbcType=INTEGER}, #{pictureId,jdbcType=INTEGER}, #{pictureText,jdbcType=VARCHAR}, 
+      #{pictureType,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemPicture" >
+    insert into t_item_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="pictureId != null" >
+        picture_id,
+      </if>
+      <if test="pictureText != null" >
+        picture_text,
+      </if>
+      <if test="pictureType != null" >
+        picture_type,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="delFlg != null" >
+        del_flg,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cUser != null" >
+        c_user,
+      </if>
+      <if test="uDate != null" >
+        u_date,
+      </if>
+      <if test="uUser != null" >
+        u_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="pictureId != null" >
+        #{pictureId,jdbcType=INTEGER},
+      </if>
+      <if test="pictureText != null" >
+        #{pictureText,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureType != null" >
+        #{pictureType,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        #{uUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TItemPicture" >
+    update t_item_picture
+    <set >
+      <if test="pictureText != null" >
+        picture_text = #{pictureText,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureType != null" >
+        picture_type = #{pictureType,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUser != null" >
+        c_user = #{cUser,jdbcType=VARCHAR},
+      </if>
+      <if test="uDate != null" >
+        u_date = #{uDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uUser != null" >
+        u_user = #{uUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and picture_id = #{pictureId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TItemPicture" >
+    update t_item_picture
+    set picture_text = #{pictureText,jdbcType=VARCHAR},
+      picture_type = #{pictureType,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      c_date = #{cDate,jdbcType=TIMESTAMP},
+      c_user = #{cUser,jdbcType=VARCHAR},
+      u_date = #{uDate,jdbcType=TIMESTAMP},
+      u_user = #{uUser,jdbcType=VARCHAR}
+    where item_id = #{itemId,jdbcType=INTEGER}
+      and picture_id = #{pictureId,jdbcType=INTEGER}
+  </update>
+  <!-- 获取商品图片 -->
+  <select id="getItemPictures" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_item_picture
+    where item_id = #{param1}
+      and picture_type = #{param2}
+  </select>
+</mapper>

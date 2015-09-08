@@ -7,9 +7,11 @@
 <title>用户管理</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showload/showLoading.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showload/jquery.showLoading.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
 </head>
 <body>

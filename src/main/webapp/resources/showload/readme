@@ -1,0 +1,4 @@
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/showload/jquery.showLoading.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/showload/showLoading.css">
+$(".add_test_img").showLoading();
+$(".add_test_img").hideLoading();

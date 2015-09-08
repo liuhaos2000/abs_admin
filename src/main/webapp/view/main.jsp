@@ -3,13 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>XXX管理平台</title>
+<title>后台管理</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/icon.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
+
 <script type="text/javascript">
 var treeData = <%=request.getAttribute("treeJson") %>;
 
@@ -26,7 +27,7 @@ $(function(){
 			} 
 		},
 		formatter: function(node) {
-			return node.text + "-";
+			return node.text + "";
 		}
 	});
 	$('#show_win').panel({
@@ -40,7 +41,7 @@ $(function(){
 <body class="easyui-layout">
 
 <div data-options="region:'north'" style="height:50px;overflow:hidden;">
-  <h1>XXX管理平台</h1>
+  <h1>后台管理</h1>
   <div id="login_user_info">欢迎你：${currentUser.name}. <a href="<%=request.getContextPath() %>/app/logout">退出</a></div>
 </div>
 
