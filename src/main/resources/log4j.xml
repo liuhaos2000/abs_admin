@@ -59,12 +59,7 @@
             <param name="conversionPattern" value="%d %-5p %c:%L - %m%n" />
         </layout>
     </appender>
-    <category name="java.sql">    
-        <priority value="debug" />    
-    </category>    
-    <category name="com.ibatis">    
-        <priority value="debug" />    
-    </category>   
+
 	<root>
 		<level value="debug" />
 		<appender-ref ref="console" />
