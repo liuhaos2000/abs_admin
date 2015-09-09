@@ -1,5 +1,10 @@
 package com.abs.mobile.dao;
 
+import java.util.Map;
+
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
+
 import com.abs.mobile.domain.TOrder;
 import com.abs.mobile.domain.TOrderKey;
 
@@ -20,4 +25,9 @@ public interface TOrderMapper {
      * @return
      */
     String getNewOrderId();
+    
+    /**
+     * List用
+     */
+    Page<Map<String, Object>> getOrderList(Map<String, Object> pMap,PageInfo pageInfo);
 }

@@ -13,7 +13,7 @@ import com.abs.mobile.service.TypeService;
 
 @Controller
 @RequestMapping("/admin/page")
-public class PageController {
+public class AdminPageController {
 
     @Resource
     private TypeService typeService;
@@ -24,7 +24,7 @@ public class PageController {
 		return "shop/lunbo";
 	}
 
-	// index
+	// order
     @RequestMapping("/order")
     public String order() {
         return "order/order";
