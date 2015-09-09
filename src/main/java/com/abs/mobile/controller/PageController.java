@@ -1,7 +1,6 @@
 package com.abs.mobile.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,16 +15,21 @@ import com.abs.mobile.service.TypeService;
 @RequestMapping("/admin/page")
 public class PageController {
 
-
     @Resource
     private TypeService typeService;
 
-	// index
+	// lunbo
 	@RequestMapping("/lunbo")
-	public String toIndex() {
+	public String lunbo() {
 		return "shop/lunbo";
 	}
-    // home
+
+	// index
+    @RequestMapping("/order")
+    public String order() {
+        return "order/order";
+    }
+
     // type
     @RequestMapping("/type")
     public String toType(ModelMap map) {
