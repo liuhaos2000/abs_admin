@@ -17,8 +17,8 @@
 	<thead>
 	<tr>
 	    <th data-options="field:'ck',checkbox:true">订单号</th>
-		<th data-options="field:'roleName'">订单号</th>
-        <th data-options="field:'roleName'">订单日期</th>
+		<th data-options="field:'order_id'">订单号</th>
+        <th data-options="field:'order_date'">订单日期</th>
 		<th data-options="field:'remark'">发货源</th>
 		<th data-options="field:'remark'">发货地址</th>
 		<th data-options="field:'remark'">姓名</th>
@@ -67,7 +67,7 @@ var UrlConfig = {
 
 $(function(){
 	$('#list_dg').datagrid({
-		url: UrlConfig.SysRoleList,
+		url: UrlConfig.orderList,
 		toolbar: '#list_dg_toolbar',
 		rownumbers: true,
 		fit: true,

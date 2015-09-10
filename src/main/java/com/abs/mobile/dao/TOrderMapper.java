@@ -29,5 +29,5 @@ public interface TOrderMapper {
     /**
      * List用
      */
-    Page<Map<String, Object>> getOrderList(Map<String, Object> pMap,PageInfo pageInfo);
+    Page<Map<String, String>> getOrderList(Map<String, Object> pMap,PageInfo pageInfo);
 }

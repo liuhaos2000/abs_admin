@@ -8,7 +8,6 @@ import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.abs.mobile.dao.TItemTypeMapper;
 import com.abs.mobile.dao.TOrderMapper;
 import com.abs.mobile.service.OrderService;
 
@@ -24,8 +23,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<Map<String, String>> getOrderList(Map<String, Object> params,
             PageInfo pageInfo) {
-        // TODO Auto-generated method stub
-        return null;
+        return tOrderMapper.getOrderList(params, pageInfo);
     }
 
 

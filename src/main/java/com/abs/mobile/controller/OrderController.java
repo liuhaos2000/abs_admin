@@ -33,7 +33,7 @@ public class OrderController extends BaseController {
     public Map<String, Object> list(
             @RequestParam(value="page", defaultValue="1") int pageNo, 
             @RequestParam(value="rows", defaultValue="20") int pageSize,
-            @RequestParam(value="orderby", defaultValue="xiaoliang asc") String orderby,
+            @RequestParam(value="orderby", defaultValue="order_date desc") String orderby,
             @ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
         
         int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
