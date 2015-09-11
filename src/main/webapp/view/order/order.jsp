@@ -19,15 +19,15 @@
 	    <th data-options="field:'ck',checkbox:true">订单号</th>
 		<th data-options="field:'order_id'">订单号</th>
         <th data-options="field:'order_date'">订单日期</th>
-		<th data-options="field:'remark'">发货源</th>
-		<th data-options="field:'remark'">发货地址</th>
-		<th data-options="field:'remark'">姓名</th>
-        <th data-options="field:'remark'">电话</th>
-        <th data-options="field:'remark'">商品名称</th>
-        <th data-options="field:'remark'">型号</th>
-        <th data-options="field:'remark'">颜色</th>
-        <th data-options="field:'remark'">数量</th>
-        <th data-options="field:'remark'">状态</th>
+		<th data-options="field:'from_name'">发货源</th>
+		<th data-options="field:'to_name'">发货地址</th>
+		<th data-options="field:'name'">姓名</th>
+        <th data-options="field:'tel'">电话</th>
+        <th data-options="field:'item_name'">商品名称</th>
+        <th data-options="field:'guige_text'">型号</th>
+        <th data-options="field:'yanse_text'">颜色</th>
+        <th data-options="field:'shuliang'">数量</th>
+        <th data-options="field:'status'">状态</th>
         <th data-options="field:'remark'">操作</th>
 	</tr>
 	<thead>
@@ -66,13 +66,30 @@ var UrlConfig = {
 };
 
 $(function(){
+	var wOrder="";
+	var colorS=["#94E698","#91BEDA"];
+	var color = "";
+
 	$('#list_dg').datagrid({
 		url: UrlConfig.orderList,
 		toolbar: '#list_dg_toolbar',
 		rownumbers: true,
 		fit: true,
-		fitColumns: true
+		fitColumns: true,
+		rowStyler:function(index,row){
+			if(wOrder==row.order_id){
+			}else{
+				if(color==colorS[0]){
+					color=colorS[1];
+				}else{
+					color=colorS[0];
+				}
+				wOrder=row.order_id;
+			}
+			return 'background-color:'+color;
+		}
 	});
+	
 });
 function sendItem(){
     $('#send_item_dialog').dialog('open').dialog('setTitle','发货');

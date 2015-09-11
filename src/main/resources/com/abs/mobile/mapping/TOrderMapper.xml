@@ -272,7 +272,7 @@
                                                       AND t1.`owner` = #{param1.owner}
                                                   </if>
         ) t3 on t2.item_id=t3.item_id and t2.item_guige=t3.item_guige and t3.item_yanse=t3.item_yanse
-            LEFT OUTER JOIN t_user_address t4 on t1.address_id = t4.address_id
+            LEFT OUTER JOIN t_user_address t4 on t1.address_id = t4.address_id and t1.open_id = t4.open_id
             left outer join t_region t5 on t4.region_name1 = t5.region_id
             left outer join t_region t6 on t4.region_name2 = t6.region_id
             left outer join t_region t7 on t4.region_name3 = t7.region_id

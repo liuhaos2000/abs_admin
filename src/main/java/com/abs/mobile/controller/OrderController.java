@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.abs.mobile.service.OrderService;
 
 @Controller
 @RequestMapping("/admin/order")
+@SessionAttributes(App.USER_SESSION_KEY)
 public class OrderController extends BaseController {
 	
     @Resource
@@ -39,7 +41,7 @@ public class OrderController extends BaseController {
         int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
         PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("userId", user.getUserId());
+        params.put("owner", user.getUsername());
         Page<Map<String,String>> page = orderService.getOrderList(params, pageInfo);
         
         Map<String, Object> data = new HashMap<String, Object>();
