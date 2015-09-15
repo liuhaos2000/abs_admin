@@ -35,6 +35,8 @@
 
 <div id="list_dg_toolbar">
     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="sendItem()">发货</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="getPdf()">PDF</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="getExcel()">EXCEL</a>
 </div>
 
 <div id="send_item_dialog" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
@@ -62,7 +64,9 @@
 
 var UrlConfig = {
 	orderList: '<%=request.getContextPath() %>/app/admin/order/list',
-		   SysRoleList: '<%=request.getContextPath() %>/app/sys/role/list',
+	getPdf: '<%=request.getContextPath() %>/app/admin/order/getPdf',
+	getExcel: '<%=request.getContextPath() %>/app/admin/order/getExcel',
+	SysRoleList: '<%=request.getContextPath() %>/app/sys/role/list'
 };
 
 $(function(){
@@ -91,10 +95,18 @@ $(function(){
 	});
 	
 });
+
 function sendItem(){
     $('#send_item_dialog').dialog('open').dialog('setTitle','发货');
     $('#wuliu_info_form').form('clear');
     url = UrlConfig.SysRoleAdd;
+}
+
+function getPdf(){
+	window.open(UrlConfig.getPdf) ;
+}
+function getExcel(){
+    window.open(UrlConfig.getExcel) ;
 }
 </script>
 
