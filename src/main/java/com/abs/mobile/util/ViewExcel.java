@@ -1,22 +1,19 @@
 package com.abs.mobile.util;
-import java.net.URLEncoder;  
-import java.util.Iterator;  
-import java.util.List;  
-import java.util.Map;  
+import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;  
-import org.apache.poi.hssf.usermodel.HSSFDataFormat;  
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFPrintSetup;
-import org.apache.poi.hssf.usermodel.HSSFRow;  
-import org.apache.poi.hssf.usermodel.HSSFSheet;  
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;  
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.springframework.web.servlet.view.document.AbstractExcelView;  
+import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 /** 
 * 生成excel视图，可用excel工具打开或者保存 
@@ -26,16 +23,15 @@ public class ViewExcel extends AbstractExcelView {
      
     public void buildExcelDocument(Map model, HSSFWorkbook workbook,     
             HttpServletRequest request, HttpServletResponse response)     
-            throws Exception {    
-          
+            throws Exception {
+        
         String excelName = "用户信息.xls";  
         // 设置response方式,使执行此controller时候自动出现下载页面,而非直接使用excel打开  
         response.setContentType("APPLICATION/OCTET-STREAM");  
         response.setHeader("Content-Disposition", "attachment; filename="+ URLEncoder.encode(excelName, "UTF-8"));    
-          
+        
         List<Map<String, Object>> orderList = (List) model.get("orderList");
         
-
         // 产生Excel表头  
         HSSFSheet sheet = workbook.createSheet("订单");
         
