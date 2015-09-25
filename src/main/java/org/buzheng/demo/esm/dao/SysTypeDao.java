@@ -1,7 +1,10 @@
 package org.buzheng.demo.esm.dao;
 
+import java.util.List;
+
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysType;
+import org.buzheng.demo.esm.domain.SysTypeSub;
 import org.springframework.data.domain.Page;
 
 public interface SysTypeDao {
@@ -28,4 +31,6 @@ public interface SysTypeDao {
      * 存在Check
      */
     int countByTypeName(String typeName);
+    
+
 }

@@ -257,7 +257,7 @@
   <!-- Admin -->
   <select id="getOrderList" resultType="map"> 
         select 
-                t1.order_id,date_format(t1.order_date,'%Y-%m-%d %H:%I:%S') as order_date,t1.`status`,t3.item_name,t3.guige_text,t3.yanse_text,t2.shuliang,t3.region_name as from_name,
+            t1.order_id,date_format(t1.order_date,'%Y-%m-%d %H:%I:%S') as order_date,t1.`status`,t2.`status` as sub_status,t3.item_name,t3.guige_text,t3.yanse_text,t2.shuliang,t3.region_name as from_name,
             t4.region_name1,t5.region_name as to1,t4.region_name2,t6.region_name as to2,t4.region_name3,t7.region_name as to3,t4.address_detail,t4.tel,t4.`name`,
             concat(t5.region_name,t6.region_name,t7.region_name,t4.address_detail) as to_name
         from t_order t1 
@@ -276,6 +276,22 @@
             left outer join t_region t5 on t4.region_name1 = t5.region_id
             left outer join t_region t6 on t4.region_name2 = t6.region_id
             left outer join t_region t7 on t4.region_name3 = t7.region_id
+        where 1=1
+             <if test="param1.orderStatus != null and param1.orderStatus != ''">
+                 AND t2.`status` = #{param1.orderStatus}
+             </if>
+             <if test="param1.orderDateFrom != null">
+                 AND t1.order_date <![CDATA[>=]]> #{param1.orderDateFrom}
+             </if>
+             <if test="param1.orderDateTo != null">
+                 AND t1.order_date <![CDATA[<=]]> #{param1.orderDateTo}
+             </if>
+             <if test="param1.tel != null and param1.tel != ''">
+                 AND t4.tel = #{param1.tel}
+             </if>
+             <if test="param1.orderId != null and param1.orderId != ''">
+                 AND t1.order_id = #{param1.orderId}
+             </if>
   </select>
   
 </mapper>

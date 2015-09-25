@@ -2,6 +2,7 @@ package org.buzheng.demo.esm.service.impl;
 
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,7 +10,9 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.dao.SysTypeDao;
+import org.buzheng.demo.esm.dao.SysTypeSubDao;
 import org.buzheng.demo.esm.domain.SysType;
+import org.buzheng.demo.esm.domain.SysTypeSub;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.buzheng.demo.esm.service.SysTypeService;
 import org.springframework.data.domain.Page;
@@ -20,9 +23,11 @@ import com.abs.util.exception.DataExistsException;
 @Service
 public class SysTypeServiceImpl implements SysTypeService {
 	
-	@Resource
-	private SysTypeDao sysTypeDao;
-
+    @Resource
+    private SysTypeDao sysTypeDao;
+    @Resource
+    private SysTypeSubDao sysTypeSubDao;
+	
     @Override
     public void save(SysType type,SysUser user) throws DataExistsException {
         
@@ -94,8 +99,12 @@ public class SysTypeServiceImpl implements SysTypeService {
         return null;
     }
 
+    /**
+     * 下拉框用
+     */
+    @Override
+    public List<SysTypeSub> getTypeList(String typeCode) {
+        return this.sysTypeSubDao.getTypeList(typeCode);
+    }
 
-
-	
-	
 }
