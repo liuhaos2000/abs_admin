@@ -133,7 +133,23 @@ var UrlConfig = {
 
 	function sendItem(){
 		// Check
-		// 
+        var ids = [];
+        var rows = $('#list_dg').datagrid('getSelections');
+        for(var i=0;i<rows.length;i++){
+        //    ids.push(rows[i].order_id);
+            if(rows[i].sub_status!='2'){
+            	 $.messager.show({
+                     title:'错误提示',
+                     msg:'选择的订单状态不是[已支付]！',
+                     showType:'fade',
+                     style:{right:'',bottom:''}
+                 });
+            	return;
+            }
+        }
+        //alert(ids.join(':'));
+		
+		
 		$('#send_item_dialog').dialog('open').dialog('setTitle','发货');
 	    $('#wuliu_info_form').form('clear');
 	}
