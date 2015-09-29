@@ -5,35 +5,25 @@ import java.util.Map;
 
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysType;
+import org.buzheng.demo.esm.domain.SysTypeSub;
 import org.buzheng.demo.esm.domain.SysUser;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.abs.util.exception.DataExistsException;
 
 public interface SysTypeService {
 	
-	/**
-	 * 保存用户
-	 * @param user
-	 * @param user 
-	 * @throws UserExistsException 用户名存在
-	 * @throws IllegalArgumentException
-	 */
 	void save(SysType type, SysUser user) throws DataExistsException;
+	void update(SysType type) throws DataExistsException;
+	void delete(String typeCode);
+	Page<SysType> findPage(PageInfo pageInfo);
+	Page<SysType> findPage(Map<String, Object> params, PageInfo pageInfo);
 	
 	/**
-	 * 保存用户
-	 * @param user
-	 * @throws DataExistsException 
-	 * @throws UserExistsException 用户名存在
+	 * 取得下拉框内容
+	 * @param typeId
+	 * @return
 	 */
-	void update(SysType type) throws DataExistsException;
-	
-	void delete(String typeCode);
-	
-	Page<SysType> findPage(PageInfo pageInfo);
-	
-	Page<SysType> findPage(Map<String, Object> params, PageInfo pageInfo);
+	List<SysTypeSub> getTypeList(String typeCode);
 	
 }

@@ -137,4 +137,11 @@
     where type_code = #{typeCode,jdbcType=INTEGER}
       and sub_type_code = #{subTypeCode,jdbcType=INTEGER}
   </update>
+    
+   <select id="getTypeList" resultMap="BaseResultMap" parameterType="java.lang.String">
+       select 
+           <include refid="Base_Column_List" />
+       from  sys_type_sub 
+       where type_code = #{typeCode}
+    </select>
 </mapper>

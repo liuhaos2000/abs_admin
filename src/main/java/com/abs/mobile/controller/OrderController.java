@@ -1,10 +1,14 @@
 package com.abs.mobile.controller;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.ConvertUtils;
 import org.buzheng.demo.esm.App;
 import org.buzheng.demo.esm.common.mybatis.PageInfo;
 import org.buzheng.demo.esm.domain.SysUser;
@@ -14,11 +18,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.abs.mobile.domain.TUser;
 import com.abs.mobile.service.OrderService;
+import com.abs.mobile.util.ViewExcel;
+import com.abs.mobile.util.ViewPDF;
+import com.abs.util.commom.AbsConst;
+import com.abs.util.commom.AbsTool;
 
 @Controller
 @RequestMapping("/admin/order")
+@SessionAttributes(App.USER_SESSION_KEY)
 public class OrderController extends BaseController {
 	
     @Resource
@@ -32,14 +44,25 @@ public class OrderController extends BaseController {
     @ResponseBody
     public Map<String, Object> list(
             @RequestParam(value="page", defaultValue="1") int pageNo, 
-            @RequestParam(value="rows", defaultValue="20") int pageSize,
+            @RequestParam(value="rows", defaultValue="15") int pageSize,
             @RequestParam(value="orderby", defaultValue="order_date desc") String orderby,
-            @ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
+            @ModelAttribute(App.USER_SESSION_KEY) SysUser user,
+            String orderStatus,
+            String orderDateFrom,
+            String orderDateTo,
+            String tel,
+            String orderId) {
         
         int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
         PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("userId", user.getUserId());
+        params.put("owner", user.getUsername());
+        params.put("orderStatus", orderStatus);
+        params.put("orderDateFrom", AbsTool.stringToTimestamp(orderDateFrom+AbsConst.TIEM_MIN));
+        params.put("orderDateTo", AbsTool.stringToTimestamp(orderDateTo+AbsConst.TIME_MAX));
+        params.put("tel", tel);
+        params.put("orderId", orderId);
+        
         Page<Map<String,String>> page = orderService.getOrderList(params, pageInfo);
         
         Map<String, Object> data = new HashMap<String, Object>();
@@ -49,4 +72,67 @@ public class OrderController extends BaseController {
         return data;
     }
     
+
+    /**
+     * 取得PDF
+     * @return
+     */
+    @RequestMapping("/getPdf")
+    public ModelAndView  getPdf(
+            @RequestParam(value="page", defaultValue="1") int pageNo, 
+            @RequestParam(value="rows", defaultValue="20") int pageSize,
+            @RequestParam(value="orderby", defaultValue="order_date desc") String orderby,
+            @ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
+        
+        Map model = new HashMap();         
+        model.put("list", getStudents());              
+        return new ModelAndView(new ViewPDF(), model);  
+    }
+    /**
+     * 取得EXCEL
+     * @return
+     */
+    @RequestMapping("/getExcel")
+    public ModelAndView  getExcel(
+            @RequestParam(value="page", defaultValue="1") int pageNo, 
+            @RequestParam(value="rows", defaultValue="999") int pageSize,
+            @RequestParam(value="orderby", defaultValue="order_id desc,order_date desc") String orderby,
+            @ModelAttribute(App.USER_SESSION_KEY) SysUser user) {
+        
+        int pgno = pageNo > 0 ? pageNo - 1 : pageNo;
+        PageInfo pageInfo = new PageInfo(pgno,pageSize,orderby);
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("owner", user.getUsername());
+        Page<Map<String,String>> page = orderService.getOrderList(params, pageInfo);
+        
+        
+        Map model = new HashMap();         
+        model.put("orderList", page.getContent());              
+        return new ModelAndView(new ViewExcel(), model);  
+    }
+    
+    /**
+     * TODO
+     * @return
+     */
+    private List getStudents(){  
+        List stuList = new ArrayList();  
+        // 构造数据  
+        TUser tuser = new TUser();
+        tuser.setNickname("AAAA1");
+        tuser.setCity("cq");
+        
+        TUser tuser1 = new TUser();
+        tuser1.setNickname("AAAA2");
+        tuser1.setCity("cq2");
+        
+        TUser tuser2 = new TUser();
+        tuser2.setNickname("AAAA3");
+        tuser2.setCity("cq3");
+        
+        stuList.add(tuser);  
+        stuList.add(tuser1);  
+        stuList.add(tuser2);  
+        return stuList;  
+    }  
 }
