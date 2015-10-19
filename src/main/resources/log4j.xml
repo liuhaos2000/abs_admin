@@ -4,7 +4,7 @@
 
 	<!-- 输出到文件 -->
 	<appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="d:/www/logs/szt-ms.log" />
+		<param name="file" value="c:/www/logs/admin/szt-ms.log" />
 		<param name="append" value="true" />
 		<param name="encoding" value="utf-8" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -27,7 +27,7 @@
         <param name="immediateFlush" value="true" />
 		<param name="append" value="true" />
 		<param name="encoding" value="utf-8" />
-        <param name="file" value="d:/www/logs/szt-ms/debug.log" />
+        <param name="file" value="c:/www/logs/admin/szt-ms/debug.log" />
         <param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">  
             <param name="conversionPattern" value="%d %-5p - %m%n" />
@@ -41,7 +41,7 @@
         <param name="immediateFlush" value="true" />
 		<param name="append" value="true" />
 		<param name="encoding" value="utf-8" />
-        <param name="file" value="d:/www/logs/szt-ms/info.log" />
+        <param name="file" value="c:/www/logs/admin/szt-ms/info.log" />
         <param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="conversionPattern" value="%d %-5p %c:%L - %m%n" />
@@ -53,7 +53,7 @@
         class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="error" />
         <param name="immediateFlush" value="true" />
-        <param name="file" value="d:/www/logs/szt-ms/error.log" />
+        <param name="file" value="c:/www/logs/admin/szt-ms/error.log" />
         <param name="datePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="conversionPattern" value="%d %-5p %c:%L - %m%n" />
