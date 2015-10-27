@@ -15,7 +15,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Override
+	@Override 
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 
