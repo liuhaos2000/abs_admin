@@ -37,7 +37,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 			builder.append(request.getContextPath());
 			builder.append("/\";</script>");
 			out.print(builder.toString());
-			out.close();
+			out.close(); 
 			return false;
 		} else {
 			return true;

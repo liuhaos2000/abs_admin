@@ -65,4 +65,7 @@
     
     
 	<import resource="applicationContext-*.xml" />
+	
+	<!-- 图片上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
 </beans>

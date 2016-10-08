@@ -9,6 +9,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/ajaxfileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
 
 <script type="text/javascript">

@@ -10,76 +10,74 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
-<title>角色管理</title>
+<title>轮播管理</title>
 </head>
 <body>
-<table id="rolelist_dg" style="width:auto" >
+<table id="list_dg" style="width:auto" >
 	<thead>
 	<tr>
-		<th data-options="field:'roleName'">角色名称</th>
-		<th data-options="field:'remark',width:300">备注</th>
+		<th data-options="field:'lunboId'">轮播图片ID</th>
+		<th data-options="field:'imgPath',width:300">轮播图片路径</th>
+		<th data-options="field:'imgText',width:300">图片文本</th>
+		<th data-options="field:'action',width:300">跳转链接</th>
 	</tr>
 	<thead>
 </table>
 
-<div id="rolelist_dg_toolbar">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">修改</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openPriv()">设置权限</a>
+<div id="list_dg_toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newData()">添加</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editData()">修改</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="delData()">删除</a>
 </div>
 
-<div id="role_save_dialog" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-        closed="true" buttons="#role_save_dialog_buttons" modal="true">
-    <div class="ftitle">请输入角色信息</div>
-    <form id="role_info_form" method="post">
+<div id="data_save_dialog" class="easyui-dialog" style="width:600px;height:600px;padding:10px 20px"
+        closed="true" buttons="#save_dialog_buttons" modal="true">
+    <div class="ftitle">请输入信息</div>
+    <form id="info_form" method="post">
         <div class="fitem">
-            <label>角色名称:</label>
-            <input type="text" name="roleName" />
+            <label>图片文本:</label>
+            <input type="text" name="imgText" />
         </div>
         <div class="fitem">
-            <label>备注:</label>
-            <input type="text" name="remark" />
+            <label>跳转链接:</label>
+            <input type="text" name="action" size="60"/>
         </div>
-        
-        <input type="hidden" name="roleId" />
+        <div class="fitem">
+            <label>图片URL:</label>
+            <input type="text" id="imgPath" name="imgPath" size="60"/>
+        </div>
+        <div class="fitem">
+            <label>上传图片:</label>
+            <input  id="uFile" type="file" name="uFile"/>
+            <input type="button" value="确定" onclick="uploadPic()" >    (640*320)
+        </div>
+        <div class="fitem">
+            <label>图片预览:</label>
+			<div id="tupian"></div>
+        </div>
+        <input type="hidden" name="lunboId" />
     </form>
 </div>
-<div id="role_save_dialog_buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#role_save_dialog').dialog('close')">取消</a>
+<div id="save_dialog_buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveData()">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#data_save_dialog').dialog('close')">取消</a>
 </div>
 
-<div id="role_menu_dialog" class="easyui-dialog" title="修改角色权限" style="width:500px;height:500px;padding:10px 20px"
-       buttons="#role_menu_dialog_buttons" data-options="modal:true, closed:true, iconCls:'icon-save'">
-    
-    <div class="ftitle">角色：<span id="menuWinRoleName"></span></div>
-    
-    <ul id="et" class="easyui-tree"></ul>
-    
-    
-</div>
-
-<div id="role_menu_dialog_buttons">
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoleMenu()">保存</a>
-	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="$('#role_menu_dialog').dialog('close');">取消</a>
-</div>
 
 <script type="text/javascript">
 
 var UrlConfig = {
-	SysRoleList: '<%=request.getContextPath() %>/app/sys/role/list',
-	SysRoleAdd: '<%=request.getContextPath() %>/app/sys/role/add',
-	SysRoleUpdate: '<%=request.getContextPath() %>/app/sys/role/update',
-	SysRoleDelete: '<%=request.getContextPath() %>/app/sys/role/delete',
-	SysRoleMenu: '<%=request.getContextPath() %>/app/sys/role/menu',
-	SysRoleSaveMenu: '<%=request.getContextPath() %>/app/sys/role/saveMenu'
+	List: '<%=request.getContextPath() %>/app/admin/lunbo/list',
+	Add: '<%=request.getContextPath() %>/app/admin/lunbo/add',
+	Update: '<%=request.getContextPath() %>/app/admin/lunbo/update',
+	Delete: '<%=request.getContextPath() %>/app/admin/lunbo/del',
+	Upload: '<%=request.getContextPath() %>/app/admin/lunbo/upload',
 };
 
 $(function(){
-	$('#rolelist_dg').datagrid({
-		url: UrlConfig.SysRoleList,
-		toolbar: '#rolelist_dg_toolbar',
+	$('#list_dg').datagrid({
+		url: UrlConfig.List,
+		toolbar: '#list_dg_toolbar',
 		singleSelect: true,
 		rownumbers: true,
 		fit: true,
@@ -88,24 +86,29 @@ $(function(){
 });
 
 var url;
-function newUser(){
-    $('#role_save_dialog').dialog('open').dialog('setTitle','添加角色');
-    $('#role_info_form').form('clear');
-    url = UrlConfig.SysRoleAdd;
+function newData(){
+    $('#data_save_dialog').dialog('open').dialog('setTitle','添加');
+    $('#info_form').form('clear');
+    url = UrlConfig.Add;
 }
-function editUser(){
-    var row = $('#rolelist_dg').datagrid('getSelected');
+
+function editData(){
+    var row = $('#list_dg').datagrid('getSelected');
 
     if (row){
-        $('#role_save_dialog').dialog('open').dialog('setTitle','编辑角色');
-        $('#role_info_form').form('load',row);
-        url = UrlConfig.SysRoleUpdate;
+        $('#data_save_dialog').dialog('open').dialog('setTitle','编辑角色');
+        $('#info_form').form('load',row);
+        
+    	var attstr= '<img src="'+row.imgPath+'" class="lunbo_img">'; 
+    	$("#tupian").html(attstr);
+        
+        url = UrlConfig.Update;
     } else {
     	alert("请选择角色");
     }
 }
-function saveUser(){
-    $('#role_info_form').form('submit',{
+function saveData(){
+    $('#info_form').form('submit',{
         url: url,
         onSubmit: function(){
             return $(this).form('validate');
@@ -113,8 +116,8 @@ function saveUser(){
         success: function(result){
         	result = eval('(' + result + ')');
             if (result.successful) {
-            	$('#role_save_dialog').dialog('close');        // close the dialog
-                $('#rolelist_dg').datagrid('reload');    // reload the user data
+            	$('#data_save_dialog').dialog('close');        // close the dialog
+                $('#list_dg').datagrid('reload');    // reload the user data
                 $.messager.show({ title: '操作结果', msg: '操作成功' });
             } else {
             	$.messager.show({ title: '操作结果', msg: result.msg });
@@ -123,77 +126,47 @@ function saveUser(){
     });
 }
 
-function destroyUser(){
-    var row = $('#rolelist_dg').datagrid('getSelected');
+function delData(){
+    var row = $('#list_dg').datagrid('getSelected');
     if (row){
-        $.messager.confirm('Confirm','请确认是否删除该角色?',function(r){
+        $.messager.confirm('Confirm','请确认是否删除该数据?',function(r){
             if (r){
-                $.post(UrlConfig.SysRoleDelete, {roleId:row.roleId}, function(result){
+                $.post(UrlConfig.Delete, {lunboId:row.lunboId}, function(result){
                     $.messager.show({ title: '操作结果', msg: '操作成功' });
-                	$('#rolelist_dg').datagrid('reload');
+                	$('#list_dg').datagrid('reload');
                 },'json');
             }
         });
     } else {
-    	alert('请选择角色');
+    	alert('请选择数据');
     }
 }
 
-function openPriv() {
-	var row = $('#rolelist_dg').datagrid('getSelected');
-	if (! row) {
-    	alert('请选择角色'); 
-    	return;
-	}
-	
-	$('#menuWinRoleName').text(row.roleName);
-	$('#role_menu_dialog').dialog('open');
-		 
-	$('#et').tree({
-		url: UrlConfig.SysRoleMenu + '?roleId=' + row.roleId,
-		animate: true,
-		checkbox: true,
-		lines: true
-	});
+function uploadPic() {
+    if($("#uFile").val()==""){  
+        $.messager.alert("提示","请选择文件夹");  
+        return false;  
+    };
+    $.ajaxFileUpload({    
+        url:UrlConfig.Upload,
+        fileElementId:'uFile', 
+        dataType: 'json',//返回数据的类型  
+        data:{name:'logan'},//一同上传的数据  
+        success: function (result, status){
+        	var attstr= '<img src="'+result.data.imgPath+'" class="lunbo_img">'; 
+        	$("#tupian").html(attstr);
+        	$("#imgPath").val(result.data.imgPath);
+        	
+        },
+        error: function (result, status)
+        {
+           alert(456);
+         }
+
+    }); 
 }
 
-function getChecked(){
 
-    var s = '';
-    var nodes = $('#et').tree('getChecked');
-    for(var i = 0; i < nodes.length; i++){
-
-        if ($('#et').tree('isLeaf', nodes[i].target)) {
-            if (s != '') {
-            	s += ',';
-            }
-            s += nodes[i].id;
-        }
-        
-    }
-    
-	return s;
-}
-
-function saveRoleMenu() {
-	var checkedMenus = getChecked();
-	
-	var row = $('#rolelist_dg').datagrid('getSelected');
-	
-	var url = UrlConfig.SysRoleSaveMenu;
-	var data = {roleId: row.roleId, menuId: checkedMenus};
-		
-	$.post(
-			url,
-			data,
-			function(result) {
-				if (result.successful) {
-					$.messager.show({title: '操作结果',msg: '操作成功'});				
-					$('#role_menu_dialog').dialog('close');
-				}
-			}, 
-			'json');
-}
 
 </script>
 

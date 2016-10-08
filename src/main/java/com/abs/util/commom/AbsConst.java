@@ -52,4 +52,16 @@ public class AbsConst {
      * 时间 23:59:59
      */
     public static final String TIME_MAX = " 23:59:59";
+    /**
+     * 时间 23:59:59
+     */
+    public static final String IMG_PATH = "/abs/img";
+    /**
+     * 时间 23:59:59
+     */
+    public static final String REAL_IMG_PATH = "c:\\abs\\img";
+    
+    
+    
+    
 }
