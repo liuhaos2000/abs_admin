@@ -11,6 +11,8 @@ public class TItem {
 
     private String owner;
 
+    private String ownerOpenId;
+
     private Integer type;
 
     private Integer prentItemId;
@@ -83,6 +85,14 @@ public class TItem {
 
     public void setOwner(String owner) {
         this.owner = owner == null ? null : owner.trim();
+    }
+
+    public String getOwnerOpenId() {
+        return ownerOpenId;
+    }
+
+    public void setOwnerOpenId(String ownerOpenId) {
+        this.ownerOpenId = ownerOpenId == null ? null : ownerOpenId.trim();
     }
 
     public Integer getType() {

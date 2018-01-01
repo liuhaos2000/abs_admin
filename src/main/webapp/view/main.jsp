@@ -4,12 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>后台管理</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/icon.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/ajaxfileupload.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui153/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui153/themes/icon.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui153/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui153/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui153/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui153/ajaxfileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
 
 <script type="text/javascript">

@@ -176,7 +176,7 @@
   </update>
   <select id="getPingjia" resultType="map">
     select 
-				date_format(t1.pingjia_date,'%Y-%m-%d- %H:%i:%S') as pingjia_date,
+				date_format(t1.pingjia_date,'%Y-%m-%d %H:%i:%S') as pingjia_date,
 				t1.pingjia_level,
 				t1.pingjia_text,
 				t2.open_id,

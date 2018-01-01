@@ -13,6 +13,7 @@
     <result column="area_id" property="areaId" jdbcType="INTEGER" />
     <result column="lever" property="lever" jdbcType="VARCHAR" />
     <result column="parent" property="parent" jdbcType="VARCHAR" />
+    <result column="refresh_token" property="refreshToken" jdbcType="VARCHAR" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
     <result column="c_user" property="cUser" jdbcType="VARCHAR" />
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     open_id, nickname, weixin_sex, city, province, country, weixin_image_url, jifen, 
-    area_id, lever, parent, del_flg, c_date, c_user, u_date, u_user
+    area_id, lever, parent, refresh_token, del_flg, c_date, c_user, u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -37,15 +38,15 @@
     insert into t_user (open_id, nickname, weixin_sex, 
       city, province, country, 
       weixin_image_url, jifen, area_id, 
-      lever, parent, del_flg, 
-      c_date, c_user, u_date, 
-      u_user)
+      lever, parent, refresh_token, 
+      del_flg, c_date, c_user, 
+      u_date, u_user)
     values (#{openId,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{weixinSex,jdbcType=CHAR}, 
       #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
       #{weixinImageUrl,jdbcType=VARCHAR}, #{jifen,jdbcType=DECIMAL}, #{areaId,jdbcType=INTEGER}, 
-      #{lever,jdbcType=VARCHAR}, #{parent,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
-      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
-      #{uUser,jdbcType=VARCHAR})
+      #{lever,jdbcType=VARCHAR}, #{parent,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, 
+      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
+      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TUser" >
     insert into t_user
@@ -82,6 +83,9 @@
       </if>
       <if test="parent != null" >
         parent,
+      </if>
+      <if test="refreshToken != null" >
+        refresh_token,
       </if>
       <if test="delFlg != null" >
         del_flg,
@@ -133,6 +137,9 @@
       <if test="parent != null" >
         #{parent,jdbcType=VARCHAR},
       </if>
+      <if test="refreshToken != null" >
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
       <if test="delFlg != null" >
         #{delFlg,jdbcType=CHAR},
       </if>
@@ -183,6 +190,9 @@
       <if test="parent != null" >
         parent = #{parent,jdbcType=VARCHAR},
       </if>
+      <if test="refreshToken != null" >
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
       <if test="delFlg != null" >
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
@@ -213,6 +223,7 @@
       area_id = #{areaId,jdbcType=INTEGER},
       lever = #{lever,jdbcType=VARCHAR},
       parent = #{parent,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -220,4 +231,17 @@
       u_user = #{uUser,jdbcType=VARCHAR}
     where open_id = #{openId,jdbcType=VARCHAR}
   </update>
+  
+  <!-- 自定义 -->
+  
+  <!-- 获取VIP用户 -->
+    <select id="getVipUserList" resultType="map">
+        select <include refid="Base_Column_List" />
+        from t_user
+        where lever in ('01','00','02')
+        and substring(open_id,1,3)!='o__'
+  </select>
+  
+  
+  
 </mapper>

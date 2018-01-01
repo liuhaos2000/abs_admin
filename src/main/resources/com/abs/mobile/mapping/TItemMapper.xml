@@ -6,6 +6,7 @@
     <result column="item_name" property="itemName" jdbcType="VARCHAR" />
     <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
     <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="owner_open_id" property="ownerOpenId" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="prent_item_id" property="prentItemId" jdbcType="INTEGER" />
     <result column="parm" property="parm" jdbcType="VARCHAR" />
@@ -31,10 +32,10 @@
     <result column="fu_text" property="fuText" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    item_id, item_name, manufacturer, owner, type, prent_item_id, parm, xiangou_flg, 
-    xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, shouhou_miaoshu, 
-    shangjia_flg, from_area, frend_title, frend_text, del_flg, c_date, c_user, u_date, 
-    u_user
+    item_id, item_name, manufacturer, owner, owner_open_id, type, prent_item_id, parm, 
+    xiangou_flg, xiangou_shuliang, baoyou_flg, wuliu_id, fapiao_flg, fapiao_title, shouhou_flg, 
+    shouhou_miaoshu, shangjia_flg, from_area, frend_title, frend_text, del_flg, c_date, 
+    c_user, u_date, u_user
   </sql>
   <sql id="Blob_Column_List" >
     fu_text
@@ -53,23 +54,23 @@
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TItem" >
     insert into t_item (item_id, item_name, manufacturer, 
-      owner, type, prent_item_id, 
-      parm, xiangou_flg, xiangou_shuliang, 
-      baoyou_flg, wuliu_id, fapiao_flg, 
-      fapiao_title, shouhou_flg, shouhou_miaoshu, 
-      shangjia_flg, from_area, frend_title, 
-      frend_text, del_flg, c_date, 
-      c_user, u_date, u_user, 
-      fu_text)
+      owner, owner_open_id, type, 
+      prent_item_id, parm, xiangou_flg, 
+      xiangou_shuliang, baoyou_flg, wuliu_id, 
+      fapiao_flg, fapiao_title, shouhou_flg, 
+      shouhou_miaoshu, shangjia_flg, from_area, 
+      frend_title, frend_text, del_flg, 
+      c_date, c_user, u_date, 
+      u_user, fu_text)
     values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
-      #{owner,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{prentItemId,jdbcType=INTEGER}, 
-      #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, #{xiangouShuliang,jdbcType=INTEGER}, 
-      #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, #{fapiaoFlg,jdbcType=CHAR}, 
-      #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, #{shouhouMiaoshu,jdbcType=VARCHAR}, 
-      #{shangjiaFlg,jdbcType=CHAR}, #{fromArea,jdbcType=INTEGER}, #{frendTitle,jdbcType=VARCHAR}, 
-      #{frendText,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
-      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}, 
-      #{fuText,jdbcType=LONGVARCHAR})
+      #{owner,jdbcType=VARCHAR}, #{ownerOpenId,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{prentItemId,jdbcType=INTEGER}, #{parm,jdbcType=VARCHAR}, #{xiangouFlg,jdbcType=CHAR}, 
+      #{xiangouShuliang,jdbcType=INTEGER}, #{baoyouFlg,jdbcType=CHAR}, #{wuliuId,jdbcType=INTEGER}, 
+      #{fapiaoFlg,jdbcType=CHAR}, #{fapiaoTitle,jdbcType=VARCHAR}, #{shouhouFlg,jdbcType=CHAR}, 
+      #{shouhouMiaoshu,jdbcType=VARCHAR}, #{shangjiaFlg,jdbcType=CHAR}, #{fromArea,jdbcType=INTEGER}, 
+      #{frendTitle,jdbcType=VARCHAR}, #{frendText,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, 
+      #{uUser,jdbcType=VARCHAR}, #{fuText,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItem" >
     insert into t_item
@@ -85,6 +86,9 @@
       </if>
       <if test="owner != null" >
         owner,
+      </if>
+      <if test="ownerOpenId != null" >
+        owner_open_id,
       </if>
       <if test="type != null" >
         type,
@@ -163,6 +167,9 @@
       <if test="owner != null" >
         #{owner,jdbcType=VARCHAR},
       </if>
+      <if test="ownerOpenId != null" >
+        #{ownerOpenId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
@@ -240,6 +247,9 @@
       <if test="owner != null" >
         owner = #{owner,jdbcType=VARCHAR},
       </if>
+      <if test="ownerOpenId != null" >
+        owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
+      </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
@@ -311,6 +321,7 @@
     set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
+      owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       prent_item_id = #{prentItemId,jdbcType=INTEGER},
       parm = #{parm,jdbcType=VARCHAR},
@@ -339,6 +350,7 @@
     set item_name = #{itemName,jdbcType=VARCHAR},
       manufacturer = #{manufacturer,jdbcType=VARCHAR},
       owner = #{owner,jdbcType=VARCHAR},
+      owner_open_id = #{ownerOpenId,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
       prent_item_id = #{prentItemId,jdbcType=INTEGER},
       parm = #{parm,jdbcType=VARCHAR},
@@ -361,140 +373,41 @@
       u_user = #{uUser,jdbcType=VARCHAR}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <!-- 自定义 -->
-  <select id="getItemTejia" resultType="map">
-        select 
-            t2.item_name
-            ,t1.item_id
-            ,t1.item_guige
-            ,t1.item_yanse
-            ,t1.guige_text
-            ,t1.yanse_text
-            ,t1.shuliang
-            ,t1.price
-            ,t1.price_huiyuan
-            ,t1.price_huodong
-            ,t1.huodong_date
-            ,t1.huodong_flg
-            ,t1.zhongliang
-            ,t3.path
-        FROM 
-        	t_item_detail t1  
-        		inner JOIN t_item t2
-        			on t1.item_id = t2.item_id
-        		inner JOIN (
-        					SELECT
-        						t31.item_id,
-        						t31.picture_id,
-        						t31.path
-        					FROM 
-        						t_item_picture t31
-        					WHERE 
-        						t31.picture_type = '3'
-        						and t31.del_flg = '0'
-        						and not EXISTS (
-        										select 
-        												t311.item_id
-        										FROM
-        												t_item_picture t311
-        										WHERE
-        												t311.item_id = t31.item_id
-        												and t311.picture_type = '3'
-        												and t311.del_flg = '0'
-        												and t311.picture_id  <![CDATA[<]]> t31.picture_id
-                                               )
-        					) t3 on t1.item_id = t3.item_id
-        
-        WHERE
-            t1.del_flg='0'
-			and t1.huodong_flg='5'
-			and t1.huodong_date<![CDATA[<=]]>CURDATE()
-        	and not EXISTS(
-        					select 
-        						t12.item_id 
-        					FROM 
-        						t_item_detail t12
-        					WHERE
-        						t1.item_id = t12.item_id
-        						and t12.del_flg='0'
-        						and t12.huodong_flg='5'
-								and t12.huodong_date<![CDATA[<=]]>CURDATE()
-        						and (t12.item_yanse <![CDATA[<]]> t1.item_yanse
-        							 or t12.item_guige <![CDATA[<]]> t1.item_guige)	
-        				)
+  <!-- 自定-->
+  <select id="getOnwerList" resultType="map">
+        select DISTINCT
+            owner
+            ,owner_open_id
+        from t_item
   </select>
-  <!--   列表查询  u.group_id = #{param1.groupId}-->
-  <select id="getItemList" resultType="map">
-            SELECT t1.item_id,
-                   t1.item_name,
-                   t2.min_price,
-                   t3.max_price,
-                   CONCAT(t2.min_price,' - ',t3.max_price) AS price,
-                   t4.path,
-                   ifnull(t5.xiaoliang,0) AS xiaoliang,
-                   ifnull(t6.pingjia_zongshu,0) AS pingjia_zongshu,
-                   ifnull(t6.good_zongshu,0) AS good_zongshu,
-                   CONCAT(ifnull(ROUND((t6.pingjia_zongshu/t6.good_zongshu))*100,0),'%') AS haopingdu
-            FROM t_item t1
-            INNER JOIN
-              ( SELECT t21.item_id,
-                       min(t21.price) AS price,
-                       min(t21.price_huiyuan) AS price_huiyuan,
-                       min(t21.price_huodong) AS price_huodong,
-                       CASE
-                           WHEN (min(t21.price) <![CDATA[<=]]> min(t21.price_huiyuan))
-                                AND (min(t21.price) <![CDATA[<=]]> min(t21.price_huodong)) THEN min(t21.price)
-                           WHEN (min(t21.price_huiyuan) <![CDATA[<=]]> min(t21.price))
-                                AND (min(t21.price_huiyuan) <![CDATA[<=]]> min(t21.price_huodong)) THEN min(t21.price_huiyuan)
-                           ELSE min(t21.price_huodong)
-                       END AS min_price
-               FROM t_item_detail t21
-               GROUP BY t21.item_id ) t2 ON t1.item_id=t2.item_id
-            INNER JOIN
-              ( SELECT t31.item_id,
-                       max(t31.price) AS price,
-                       max(t31.price_huiyuan) AS price_huiyuan,
-                       max(t31.price_huodong) AS price_huodong,
-                       CASE
-                           WHEN (max(t31.price) <![CDATA[>=]]> max(t31.price_huiyuan))
-                                AND (max(t31.price) <![CDATA[>=]]> max(t31.price_huodong)) THEN max(t31.price)
-                           WHEN (max(t31.price_huiyuan) <![CDATA[>=]]> max(t31.price))
-                                AND (max(t31.price_huiyuan) <![CDATA[>=]]> max(t31.price_huodong)) THEN max(t31.price_huiyuan)
-                           ELSE max(t31.price_huodong)
-                       END AS max_price
-               FROM t_item_detail t31
-               GROUP BY t31.item_id ) t3 ON t1.item_id=t3.item_id
-            LEFT OUTER JOIN t_item_picture t4 ON t1.item_id=t4.item_id
-            LEFT OUTER JOIN t_item_xiaoliang t5 ON t1.item_id=t5.item_id
-            LEFT OUTER JOIN
-              ( SELECT t61.item_id,
-                       Count(t61.pingjia_id) AS pingjia_zongshu,
-                       sum( CASE WHEN t61.pingjia_level<![CDATA[>=]]>'4' THEN 1 ELSE 0 END ) AS good_zongshu
-               FROM t_item_pingjia t61
-               GROUP BY t61.item_id ) t6 ON t1.item_id=t6.item_id
-            WHERE t1.del_flg='0'
-              AND t4.picture_type='3'
-              AND t4.del_flg='0'
-              <if test="param1.searchParm != null and param1.searchParm != ''">
-                AND t1.item_name LIKE #{param1.searchParm}
-              </if>
-              <if test="param1.typeId != null and param1.typeId != ''"> 
-                AND t1.type=#{param1.typeId}
-              </if>
+    <select id="getItemList" resultType="map"> 
+        select 
+    		<include refid="Base_Column_List" />
+        from t_item
+        where 1=1
+            <if test="param1.searchOwnerOpenId != null and param1.searchOwnerOpenId != ''">
+                 AND owner_open_id = #{param1.searchOwnerOpenId}
+            </if>
+            <if test="param1.searchItemName != null and param1.searchItemName != ''">
+                 AND item_name like CONCAT('%',#{param1.searchItemName},'%')
+            </if>
     </select>
-    <select id="getItemInfo" resultType="map">
-        SELECT
-            t1.item_id,t1.item_name,t1.manufacturer,t1.owner,t1.type,t1.prent_item_id,t1.parm,
-            t1.xiangou_flg,t1.xiangou_shuliang,t1.baoyou_flg,t1.wuliu_id,t1.fapiao_flg,
-            t1.fapiao_title,t1.shouhou_flg,t1.shouhou_miaoshu,t1.
-            shangjia_flg,t1.from_area,t1.frend_title,t1.frend_text,
-        	  t1.del_flg,t1.c_date,t1.c_user,t1.u_date,t1.u_user,t1.fu_text,
-            t2.region_name,t3.path
-        from t_item t1 LEFT OUTER JOIN t_region t2 on t1.from_area = t2.region_id
-        							 LEFT OUTER JOIN t_item_picture t3 ON t1.item_id = t3.item_id
-        where t1.item_id=#{param1}
-        			and t3.picture_type=#{param2}
-        			and t1.shangjia_flg='1'
-    </select>
+  <select id="getNewItemId" resultType="java.lang.String">
+    select 
+      IFNULL(max(item_id),0)+1 as item_id
+    from t_item
+  </select>
+  <select id="getNewItemGuige" resultType="java.lang.String">
+	SELECT
+		IFNULL(max(item_guige),0)+1 as item_guige
+	from t_item_detail
+		where item_id=#{itemId}
+  </select>
+  <select id="getNewPictureId" resultType="java.lang.String">
+	select 
+		IFNULL(max(picture_id),0)+1 as picture_id
+	from t_item_picture
+		where item_id=#{itemId}
+  </select>
 
 </mapper>

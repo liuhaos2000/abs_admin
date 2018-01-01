@@ -3,14 +3,26 @@ package com.abs.mobile.domain;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TOrder extends TOrderKey {
+public class TOrder {
+    private String orderId;
+
+    private String orderZhifuId;
+
     private Date orderDate;
 
     private String status;
 
     private String openId;
 
+    private String userLv;
+
     private Integer addressId;
+
+    private String name;
+
+    private String tel;
+
+    private String addressFull;
 
     private BigDecimal totlePrice;
 
@@ -26,6 +38,18 @@ public class TOrder extends TOrderKey {
 
     private BigDecimal shijiPrice;
 
+    private String pOpenId;
+
+    private String pUserLv;
+
+    private BigDecimal cost;
+
+    private BigDecimal lv00Lirun;
+
+    private BigDecimal lv01Lirun;
+
+    private BigDecimal lv02Lirun;
+
     private String delFlg;
 
     private Date cDate;
@@ -35,6 +59,22 @@ public class TOrder extends TOrderKey {
     private Date uDate;
 
     private String uUser;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
+    }
+
+    public String getOrderZhifuId() {
+        return orderZhifuId;
+    }
+
+    public void setOrderZhifuId(String orderZhifuId) {
+        this.orderZhifuId = orderZhifuId == null ? null : orderZhifuId.trim();
+    }
 
     public Date getOrderDate() {
         return orderDate;
@@ -60,12 +100,44 @@ public class TOrder extends TOrderKey {
         this.openId = openId == null ? null : openId.trim();
     }
 
+    public String getUserLv() {
+        return userLv;
+    }
+
+    public void setUserLv(String userLv) {
+        this.userLv = userLv == null ? null : userLv.trim();
+    }
+
     public Integer getAddressId() {
         return addressId;
     }
 
     public void setAddressId(Integer addressId) {
         this.addressId = addressId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
+    public String getAddressFull() {
+        return addressFull;
+    }
+
+    public void setAddressFull(String addressFull) {
+        this.addressFull = addressFull == null ? null : addressFull.trim();
     }
 
     public BigDecimal getTotlePrice() {
@@ -122,6 +194,54 @@ public class TOrder extends TOrderKey {
 
     public void setShijiPrice(BigDecimal shijiPrice) {
         this.shijiPrice = shijiPrice;
+    }
+
+    public String getpOpenId() {
+        return pOpenId;
+    }
+
+    public void setpOpenId(String pOpenId) {
+        this.pOpenId = pOpenId == null ? null : pOpenId.trim();
+    }
+
+    public String getpUserLv() {
+        return pUserLv;
+    }
+
+    public void setpUserLv(String pUserLv) {
+        this.pUserLv = pUserLv == null ? null : pUserLv.trim();
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public BigDecimal getLv00Lirun() {
+        return lv00Lirun;
+    }
+
+    public void setLv00Lirun(BigDecimal lv00Lirun) {
+        this.lv00Lirun = lv00Lirun;
+    }
+
+    public BigDecimal getLv01Lirun() {
+        return lv01Lirun;
+    }
+
+    public void setLv01Lirun(BigDecimal lv01Lirun) {
+        this.lv01Lirun = lv01Lirun;
+    }
+
+    public BigDecimal getLv02Lirun() {
+        return lv02Lirun;
+    }
+
+    public void setLv02Lirun(BigDecimal lv02Lirun) {
+        this.lv02Lirun = lv02Lirun;
     }
 
     public String getDelFlg() {

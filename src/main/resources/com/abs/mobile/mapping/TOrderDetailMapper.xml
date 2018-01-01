@@ -6,6 +6,7 @@
     <id column="item_id" property="itemId" jdbcType="INTEGER" />
     <id column="item_guige" property="itemGuige" jdbcType="INTEGER" />
     <id column="item_yanse" property="itemYanse" jdbcType="INTEGER" />
+    <id column="tuihuo_flg" property="tuihuoFlg" jdbcType="CHAR" />
     <result column="guige_text" property="guigeText" jdbcType="VARCHAR" />
     <result column="yanse_text" property="yanseText" jdbcType="VARCHAR" />
     <result column="owner" property="owner" jdbcType="VARCHAR" />
@@ -13,8 +14,13 @@
     <result column="huodong_flg" property="huodongFlg" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="wuliu_id" property="wuliuId" jdbcType="INTEGER" />
+    <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
+    <result column="gongsi_id" property="gongsiId" jdbcType="VARCHAR" />
     <result column="wuliu_code" property="wuliuCode" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="lv00_lirun" property="lv00Lirun" jdbcType="DECIMAL" />
+    <result column="lv01_lirun" property="lv01Lirun" jdbcType="DECIMAL" />
+    <result column="lv02_lirun" property="lv02Lirun" jdbcType="DECIMAL" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
     <result column="c_user" property="cUser" jdbcType="VARCHAR" />
@@ -22,9 +28,9 @@
     <result column="u_user" property="uUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, item_id, item_guige, item_yanse, guige_text, yanse_text, owner, shuliang, 
-    huodong_flg, price, status, wuliu_id, wuliu_code, del_flg, c_date, c_user, u_date, 
-    u_user
+    order_id, item_id, item_guige, item_yanse, tuihuo_flg, guige_text, yanse_text, owner, 
+    shuliang, huodong_flg, price, status, msg_status, gongsi_id, wuliu_code, cost, lv00_lirun, 
+    lv01_lirun, lv02_lirun, del_flg, c_date, c_user, u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
     select 
@@ -34,6 +40,7 @@
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and tuihuo_flg = #{tuihuoFlg,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetailKey" >
     delete from t_order_detail
@@ -41,20 +48,25 @@
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and tuihuo_flg = #{tuihuoFlg,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.abs.mobile.domain.TOrderDetail" >
     insert into t_order_detail (order_id, item_id, item_guige, 
-      item_yanse, guige_text, yanse_text, 
-      owner, shuliang, huodong_flg, 
-      price, status, wuliu_id, 
-      wuliu_code, del_flg, c_date, 
+      item_yanse, tuihuo_flg, guige_text, 
+      yanse_text, owner, shuliang, 
+      huodong_flg, price, status, 
+      msg_status, gongsi_id, wuliu_code, 
+      cost, lv00_lirun, lv01_lirun, 
+      lv02_lirun, del_flg, c_date, 
       c_user, u_date, u_user
       )
     values (#{orderId,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, 
-      #{itemYanse,jdbcType=INTEGER}, #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, 
-      #{owner,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, #{huodongFlg,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{wuliuId,jdbcType=INTEGER}, 
-      #{wuliuCode,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{itemYanse,jdbcType=INTEGER}, #{tuihuoFlg,jdbcType=CHAR}, #{guigeText,jdbcType=VARCHAR}, 
+      #{yanseText,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, 
+      #{huodongFlg,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+      #{msgStatus,jdbcType=VARCHAR}, #{gongsiId,jdbcType=VARCHAR}, #{wuliuCode,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=DECIMAL}, #{lv00Lirun,jdbcType=DECIMAL}, #{lv01Lirun,jdbcType=DECIMAL}, 
+      #{lv02Lirun,jdbcType=DECIMAL}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
       #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
       )
   </insert>
@@ -72,6 +84,9 @@
       </if>
       <if test="itemYanse != null" >
         item_yanse,
+      </if>
+      <if test="tuihuoFlg != null" >
+        tuihuo_flg,
       </if>
       <if test="guigeText != null" >
         guige_text,
@@ -94,11 +109,26 @@
       <if test="status != null" >
         status,
       </if>
-      <if test="wuliuId != null" >
-        wuliu_id,
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="gongsiId != null" >
+        gongsi_id,
       </if>
       <if test="wuliuCode != null" >
         wuliu_code,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun,
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun,
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun,
       </if>
       <if test="delFlg != null" >
         del_flg,
@@ -129,6 +159,9 @@
       <if test="itemYanse != null" >
         #{itemYanse,jdbcType=INTEGER},
       </if>
+      <if test="tuihuoFlg != null" >
+        #{tuihuoFlg,jdbcType=CHAR},
+      </if>
       <if test="guigeText != null" >
         #{guigeText,jdbcType=VARCHAR},
       </if>
@@ -150,11 +183,26 @@
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="wuliuId != null" >
-        #{wuliuId,jdbcType=INTEGER},
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiId != null" >
+        #{gongsiId,jdbcType=VARCHAR},
       </if>
       <if test="wuliuCode != null" >
         #{wuliuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        #{lv02Lirun,jdbcType=DECIMAL},
       </if>
       <if test="delFlg != null" >
         #{delFlg,jdbcType=CHAR},
@@ -197,11 +245,26 @@
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
       </if>
-      <if test="wuliuId != null" >
-        wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiId != null" >
+        gongsi_id = #{gongsiId,jdbcType=VARCHAR},
       </if>
       <if test="wuliuCode != null" >
         wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
       </if>
       <if test="delFlg != null" >
         del_flg = #{delFlg,jdbcType=CHAR},
@@ -223,6 +286,7 @@
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and tuihuo_flg = #{tuihuoFlg,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TOrderDetail" >
     update t_order_detail
@@ -233,8 +297,13 @@
       huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
       status = #{status,jdbcType=VARCHAR},
-      wuliu_id = #{wuliuId,jdbcType=INTEGER},
+      msg_status = #{msgStatus,jdbcType=VARCHAR},
+      gongsi_id = #{gongsiId,jdbcType=VARCHAR},
       wuliu_code = #{wuliuCode,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -244,5 +313,6 @@
       and item_id = #{itemId,jdbcType=INTEGER}
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
+      and tuihuo_flg = #{tuihuoFlg,jdbcType=CHAR}
   </update>
 </mapper>

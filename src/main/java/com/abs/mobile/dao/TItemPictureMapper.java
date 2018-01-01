@@ -1,6 +1,10 @@
 package com.abs.mobile.dao;
 
-import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
 
 import com.abs.mobile.domain.TItemPicture;
 import com.abs.mobile.domain.TItemPictureKey;
@@ -18,9 +22,7 @@ public interface TItemPictureMapper {
 
     int updateByPrimaryKey(TItemPicture record);
     /**
-     * 商品画面用
-     * @param itemId
-     * @return
+     * List用 图片
      */
-    List<TItemPicture> getItemPictures(String itemId,String type);
+    Page<Map<String, String>> getItemPictureList(@Param("param1")Map<String, Object> param1,PageInfo pageInfo);
 }

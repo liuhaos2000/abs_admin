@@ -22,6 +22,7 @@
 		<th data-options="field:'action',width:300">跳转链接</th>
 	</tr>
 	<thead>
+
 </table>
 
 <div id="list_dg_toolbar">
@@ -36,15 +37,15 @@
     <form id="info_form" method="post">
         <div class="fitem">
             <label>图片文本:</label>
-            <input type="text" name="imgText" />
+            <input class="easyui-textbox" type="text" name="imgText" data-options="prompt:'可以空著'"/>
         </div>
         <div class="fitem">
             <label>跳转链接:</label>
-            <input type="text" name="action" size="60"/>
+            <input  class="easyui-textbox" type="text" name="action" size="60" data-options="prompt:'非开发人员默认填写#'"/>
         </div>
         <div class="fitem">
             <label>图片URL:</label>
-            <input type="text" id="imgPath" name="imgPath" size="60"/>
+            <input class="easyui-textbox" type="text" id="imgPath" name="imgPath" size="60"/>
         </div>
         <div class="fitem">
             <label>上传图片:</label>
@@ -55,7 +56,11 @@
             <label>图片预览:</label>
 			<div id="tupian"></div>
         </div>
+          <div class="fitem">
+<input class="easyui-textbox" label="Email:" labelPosition="top" data-options="prompt:'Enter a email address...',validType:'email'" style="width:100%;height:52px">
+        </div>
         <input type="hidden" name="lunboId" />
+        
     </form>
 </div>
 <div id="save_dialog_buttons">

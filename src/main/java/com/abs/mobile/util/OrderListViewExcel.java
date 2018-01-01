@@ -19,13 +19,13 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 * 生成excel视图，可用excel工具打开或者保存 
 * 由ViewController的return new ModelAndView(viewExcel, model)生成 
 */  
-public class ViewExcel extends AbstractExcelView {     
+public class OrderListViewExcel extends AbstractExcelView {     
      
     public void buildExcelDocument(Map model, HSSFWorkbook workbook,     
             HttpServletRequest request, HttpServletResponse response)     
             throws Exception {
         
-        String excelName = "用户信息.xls";  
+        String excelName = "订单信息.xls";  
         // 设置response方式,使执行此controller时候自动出现下载页面,而非直接使用excel打开  
         response.setContentType("APPLICATION/OCTET-STREAM");  
         response.setHeader("Content-Disposition", "attachment; filename="+ URLEncoder.encode(excelName, "UTF-8"));    
@@ -122,7 +122,7 @@ public class ViewExcel extends AbstractExcelView {
             row.createCell((short) 2)  
             .setCellValue((String)order.get("order_date"));  
             row.createCell((short) 3)  
-            .setCellValue((String)order.get("to_name")); 
+            .setCellValue((String)order.get("owner")); 
             row.createCell((short) 4)  
             .setCellValue((String)order.get("name")); 
             row.createCell((short) 5)  
@@ -148,7 +148,7 @@ public class ViewExcel extends AbstractExcelView {
             }
             
             row.createCell((short) 10)
-            .setCellValue((String)order.get("sub_status")); 
+            .setCellValue(s); 
             row.createCell((short) 11)
             .setCellValue(""); 
             

@@ -151,11 +151,10 @@
       and picture_id = #{pictureId,jdbcType=INTEGER}
   </update>
   <!-- 获取商品图片 -->
-  <select id="getItemPictures" resultMap="BaseResultMap">
+  <select id="getItemPictureList" resultType="map">
     select 
     <include refid="Base_Column_List" />
     from t_item_picture
-    where item_id = #{param1}
-      and picture_type = #{param2}
+    where item_id = #{param1.itemId}
   </select>
 </mapper>

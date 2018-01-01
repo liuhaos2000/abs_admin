@@ -9,6 +9,8 @@ public class TOrderDetailKey {
 
     private Integer itemYanse;
 
+    private String tuihuoFlg;
+
     public String getOrderId() {
         return orderId;
     }
@@ -39,5 +41,13 @@ public class TOrderDetailKey {
 
     public void setItemYanse(Integer itemYanse) {
         this.itemYanse = itemYanse;
+    }
+
+    public String getTuihuoFlg() {
+        return tuihuoFlg;
+    }
+
+    public void setTuihuoFlg(String tuihuoFlg) {
+        this.tuihuoFlg = tuihuoFlg == null ? null : tuihuoFlg.trim();
     }
 }

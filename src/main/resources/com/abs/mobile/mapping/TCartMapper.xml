@@ -196,8 +196,8 @@
                          and t1.open_id=#{openId}
                          and t2.del_flg='0'
                          and t2.shangjia_flg='1'
-
-
+                order by 
+                       t1.c_date desc
   </select>
   <sql id="getItemFromCartWhitYoufeiSQL" >
                     select  
@@ -263,6 +263,8 @@
                          t4.picture_type='3'
                          and t1.open_id=#{param1}
                          and t1.del_flg='1'
+                order by 
+                       t1.c_date desc
   </sql>
   <select id="getItemFromCartWhitYoufei" resultType="map" >
         <include refid="getItemFromCartWhitYoufeiSQL" />

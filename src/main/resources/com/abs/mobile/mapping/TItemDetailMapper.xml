@@ -14,6 +14,10 @@
     <result column="huodong_date" property="huodongDate" jdbcType="DATE" />
     <result column="huodong_flg" property="huodongFlg" jdbcType="VARCHAR" />
     <result column="zhongliang" property="zhongliang" jdbcType="DECIMAL" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="lv00_lirun" property="lv00Lirun" jdbcType="DECIMAL" />
+    <result column="lv01_lirun" property="lv01Lirun" jdbcType="DECIMAL" />
+    <result column="lv02_lirun" property="lv02Lirun" jdbcType="DECIMAL" />
     <result column="del_flg" property="delFlg" jdbcType="CHAR" />
     <result column="c_date" property="cDate" jdbcType="TIMESTAMP" />
     <result column="c_user" property="cUser" jdbcType="VARCHAR" />
@@ -22,8 +26,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     item_id, item_guige, item_yanse, guige_text, yanse_text, shuliang, price, price_huiyuan, 
-    price_huodong, huodong_date, huodong_flg, zhongliang, del_flg, c_date, c_user, u_date, 
-    u_user
+    price_huodong, huodong_date, huodong_flg, zhongliang, cost, lv00_lirun, lv01_lirun, 
+    lv02_lirun, del_flg, c_date, c_user, u_date, u_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.abs.mobile.domain.TItemDetailKey" >
     select 
@@ -44,14 +48,18 @@
       guige_text, yanse_text, shuliang, 
       price, price_huiyuan, price_huodong, 
       huodong_date, huodong_flg, zhongliang, 
-      del_flg, c_date, c_user, 
-      u_date, u_user)
+      cost, lv00_lirun, lv01_lirun, 
+      lv02_lirun, del_flg, c_date, 
+      c_user, u_date, u_user
+      )
     values (#{itemId,jdbcType=INTEGER}, #{itemGuige,jdbcType=INTEGER}, #{itemYanse,jdbcType=INTEGER}, 
       #{guigeText,jdbcType=VARCHAR}, #{yanseText,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, 
       #{price,jdbcType=DECIMAL}, #{priceHuiyuan,jdbcType=DECIMAL}, #{priceHuodong,jdbcType=DECIMAL}, 
       #{huodongDate,jdbcType=DATE}, #{huodongFlg,jdbcType=VARCHAR}, #{zhongliang,jdbcType=DECIMAL}, 
-      #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, #{cUser,jdbcType=VARCHAR}, 
-      #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR})
+      #{cost,jdbcType=DECIMAL}, #{lv00Lirun,jdbcType=DECIMAL}, #{lv01Lirun,jdbcType=DECIMAL}, 
+      #{lv02Lirun,jdbcType=DECIMAL}, #{delFlg,jdbcType=CHAR}, #{cDate,jdbcType=TIMESTAMP}, 
+      #{cUser,jdbcType=VARCHAR}, #{uDate,jdbcType=TIMESTAMP}, #{uUser,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.abs.mobile.domain.TItemDetail" >
     insert into t_item_detail
@@ -91,6 +99,18 @@
       </if>
       <if test="zhongliang != null" >
         zhongliang,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun,
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun,
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun,
       </if>
       <if test="delFlg != null" >
         del_flg,
@@ -145,6 +165,18 @@
       <if test="zhongliang != null" >
         #{zhongliang,jdbcType=DECIMAL},
       </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        #{lv02Lirun,jdbcType=DECIMAL},
+      </if>
       <if test="delFlg != null" >
         #{delFlg,jdbcType=CHAR},
       </if>
@@ -192,6 +224,18 @@
       <if test="zhongliang != null" >
         zhongliang = #{zhongliang,jdbcType=DECIMAL},
       </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="lv00Lirun != null" >
+        lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv01Lirun != null" >
+        lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      </if>
+      <if test="lv02Lirun != null" >
+        lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
+      </if>
       <if test="delFlg != null" >
         del_flg = #{delFlg,jdbcType=CHAR},
       </if>
@@ -223,6 +267,10 @@
       huodong_date = #{huodongDate,jdbcType=DATE},
       huodong_flg = #{huodongFlg,jdbcType=VARCHAR},
       zhongliang = #{zhongliang,jdbcType=DECIMAL},
+      cost = #{cost,jdbcType=DECIMAL},
+      lv00_lirun = #{lv00Lirun,jdbcType=DECIMAL},
+      lv01_lirun = #{lv01Lirun,jdbcType=DECIMAL},
+      lv02_lirun = #{lv02Lirun,jdbcType=DECIMAL},
       del_flg = #{delFlg,jdbcType=CHAR},
       c_date = #{cDate,jdbcType=TIMESTAMP},
       c_user = #{cUser,jdbcType=VARCHAR},
@@ -232,85 +280,10 @@
       and item_guige = #{itemGuige,jdbcType=INTEGER}
       and item_yanse = #{itemYanse,jdbcType=INTEGER}
   </update>
-  <select id="getItemDetail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getItemDetailList" resultType="map"> 
     select 
     <include refid="Base_Column_List" />
     from t_item_detail
-    where item_id = #{itemId}
-    	 and del_flg='0'
-  </select>
-  <select id="getItemXinghao" resultType="map" parameterType="java.lang.String" >
-  	select  DISTINCT
- 		t1.item_guige,
- 		t1.guige_text
-    from t_item_detail t1
-    where t1.item_id = #{itemId}
-    	and t1.item_guige!='0'
-  </select>
-  <select id="getItemYanse" resultType="map" parameterType="java.lang.String" >
-	select  DISTINCT
- 		t1.item_yanse,
- 		t1.yanse_text
-    from t_item_detail t1
-    where t1.item_id = #{itemId}
-    	and t1.item_yanse!='0'
-  </select>
-  <select id="getItemSalePrice" resultType="map">
-    SELECT 
-        CASE 
-            WHEN t1.huodong_flg = '0' THEN t1.price 
-            WHEN t1.huodong_flg = '1' THEN t1.price_huiyuan 
-            WHEN t1.huodong_flg = '7' THEN t1.price_huodong 
-            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.price_huodong 
-            ELSE t1.price_huiyuan 
-        END AS sale_price,
-        CASE 
-            WHEN t1.huodong_flg = '0' THEN  t1.huodong_flg 
-            WHEN t1.huodong_flg = '1' THEN  t1.huodong_flg 
-            WHEN t1.huodong_flg = '7' THEN  t1.huodong_flg 
-            WHEN DATE_FORMAT(t1.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t1.huodong_flg 
-            ELSE '1'
-        END AS end_price_type
-          ,item_id, item_guige, item_yanse, guige_text
-            , yanse_text, shuliang, price, price_huiyuan, price_huodong
-            , huodong_date, huodong_flg, zhongliang, del_flg, c_date
-            , c_user, u_date, u_user
-    FROM t_item_detail t1
-    WHERE t1.item_id = #{param1}
-            AND t1.item_guige = #{param2}
-            AND t1.item_yanse = #{param3}
-  </select>
-  <select id="getItemPriceFromTo" resultType="map"  parameterType="java.lang.String">
-        Select 
-            t11.item_id,
-            min(t11.sale_price) as min_sale_price,
-            max(t11.sale_price) as max_sale_price,
-            concat(min(t11.sale_price),' - ',max(t11.sale_price)) as price_from_to
-        from
-            (
-                SELECT 
-                CASE 
-                    WHEN t111.huodong_flg = '0' THEN t111.price 
-                    WHEN t111.huodong_flg = '1' THEN t111.price_huiyuan 
-                    WHEN t111.huodong_flg = '7' THEN t111.price_huodong 
-                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.price_huodong 
-                    ELSE t111.price_huiyuan 
-                END AS sale_price,
-                CASE 
-                    WHEN t111.huodong_flg = '0' THEN  t111.huodong_flg 
-                    WHEN t111.huodong_flg = '1' THEN  t111.huodong_flg 
-                    WHEN t111.huodong_flg = '7' THEN  t111.huodong_flg 
-                    WHEN DATE_FORMAT(t111.huodong_date, '%Y-%m-%d') >= DATE_FORMAT(CURDATE(), '%Y-%m-%d') THEN t111.huodong_flg 
-                    ELSE '1'
-                END AS end_price_type
-                  ,item_id, item_guige, item_yanse, guige_text
-                    , yanse_text, shuliang, price, price_huiyuan, price_huodong
-                    , huodong_date, huodong_flg, zhongliang, del_flg, c_date
-                    , c_user, u_date, u_user
-                FROM t_item_detail t111
-                WHERE t111.item_id = #{itemId}
-            ) t11
-        group by
-        t11.item_id
+    where item_id = #{param1.itemId}
   </select>
 </mapper>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.abs.mobile.dao.TWuliuGongsiMapper" >
+  <resultMap id="BaseResultMap" type="com.abs.mobile.domain.TWuliuGongsi" >
+    <id column="gongsi_id" property="gongsiId" jdbcType="VARCHAR" />
+    <result column="gongsi_name" property="gongsiName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gongsi_id, gongsi_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wuliu_gongsi
+    where gongsi_id = #{gongsiId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_wuliu_gongsi
+    where gongsi_id = #{gongsiId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.abs.mobile.domain.TWuliuGongsi" >
+    insert into t_wuliu_gongsi (gongsi_id, gongsi_name)
+    values (#{gongsiId,jdbcType=VARCHAR}, #{gongsiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abs.mobile.domain.TWuliuGongsi" >
+    insert into t_wuliu_gongsi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gongsiId != null" >
+        gongsi_id,
+      </if>
+      <if test="gongsiName != null" >
+        gongsi_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gongsiId != null" >
+        #{gongsiId,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiName != null" >
+        #{gongsiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abs.mobile.domain.TWuliuGongsi" >
+    update t_wuliu_gongsi
+    <set >
+      <if test="gongsiName != null" >
+        gongsi_name = #{gongsiName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gongsi_id = #{gongsiId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abs.mobile.domain.TWuliuGongsi" >
+    update t_wuliu_gongsi
+    set gongsi_name = #{gongsiName,jdbcType=VARCHAR}
+    where gongsi_id = #{gongsiId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- 自定义 -->
+   <select id="getWuliuGongsiList" resultType="map">
+        select
+            gongsi_id, gongsi_name
+        from t_wuliu_gongsi
+  </select>
+  
+</mapper>

@@ -2,7 +2,7 @@ package com.abs.mobile.domain;
 
 import java.util.Date;
 
-public class TUser {
+public class TUser implements Cloneable {
     private String openId;
 
     private String nickname;
@@ -24,6 +24,8 @@ public class TUser {
     private String lever;
 
     private String parent;
+
+    private String refreshToken;
 
     private String delFlg;
 
@@ -121,6 +123,14 @@ public class TUser {
 
     public void setParent(String parent) {
         this.parent = parent == null ? null : parent.trim();
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken == null ? null : refreshToken.trim();
     }
 
     public String getDelFlg() {

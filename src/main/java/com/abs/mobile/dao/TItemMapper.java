@@ -23,15 +23,18 @@ public interface TItemMapper {
 
     int updateByPrimaryKey(TItem record);
     /**
-     * Home用
+     * 下拉框用
      */
-    List<Map<String, String>> getItemTejia();
+    List<Map<String, String>> getOnwerList();
     /**
      * List用
      */
     Page<Map<String, String>> getItemList(Map<String, Object> pMap,PageInfo pageInfo);
+    
     /**
-     * Item用
+     * 采番
      */
-    List<Map<String, String>> getItemInfo(String itemId,String pictureType);
+    String getNewItemId();
+    String getNewItemGuige(Integer itemId);
+    String getNewPictureId(Integer itemId);
 }
