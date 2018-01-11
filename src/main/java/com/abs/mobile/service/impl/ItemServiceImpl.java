@@ -15,11 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.abs.mobile.dao.TItemDetailMapper;
 import com.abs.mobile.dao.TItemMapper;
 import com.abs.mobile.dao.TItemPictureMapper;
+import com.abs.mobile.dao.TItemXiaoliangMapper;
 import com.abs.mobile.domain.TItem;
 import com.abs.mobile.domain.TItemDetail;
 import com.abs.mobile.domain.TItemDetailKey;
 import com.abs.mobile.domain.TItemPicture;
 import com.abs.mobile.domain.TItemPictureKey;
+import com.abs.mobile.domain.TItemXiaoliang;
 import com.abs.mobile.service.ItemService;
 import com.abs.util.commom.ObjUtil;
 
@@ -32,6 +34,8 @@ public class ItemServiceImpl implements ItemService {
     TItemDetailMapper tItemDetailMapper;
     @Resource
     TItemPictureMapper tItemPictureMapper;
+    @Resource
+    TItemXiaoliangMapper tItemXiaoliangMapper;
 
     /**
      * 获取item列表
@@ -57,15 +61,15 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Override
 	@Transactional
-	public void itemSave(String changeMod, TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1,String itemId) {
+	public void itemSave(String changeMod, TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1,String itemId,String xiaoliang) {
 		//mod 1 新建   2更新
 		if("1".equals(changeMod)){
-			itemAdd(item,itemDist1,itemPist1);
+			itemAdd(item,itemDist1,itemPist1,xiaoliang);
 		}else if("2".equals(changeMod)){
-			itemUpd(item,itemDist1,itemPist1,new Integer(itemId));
+			itemUpd(item,itemDist1,itemPist1,new Integer(itemId),xiaoliang);
 		}
 	}
-	private void itemAdd(TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1){
+	private void itemAdd(TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1,String xiaoliang){
 		Date date=new Date();
 		// tiem
 		Integer itemId=new Integer(tItemMapper.getNewItemId());
@@ -130,8 +134,14 @@ public class ItemServiceImpl implements ItemService {
 				tItemPictureMapper.insert(itemPicture);
 			}
 		}
+		// 销量
+		
+		TItemXiaoliang record=new TItemXiaoliang();
+		record.setItemId(itemId);
+		record.setXiaoliang(new Integer(xiaoliang));
+		tItemXiaoliangMapper.insert(record);
 	}
-	private void itemUpd(TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1,Integer itemId){
+	private void itemUpd(TItem item, List<Map<String,String>> itemDist1, List<Map<String,String>> itemPist1,Integer itemId,String xiaoliang){
 		Date date=new Date();
 		//1 更新Item
 		TItem tItem = tItemMapper.selectByPrimaryKey(itemId);
@@ -249,5 +259,10 @@ public class ItemServiceImpl implements ItemService {
 				tItemPictureMapper.deleteByPrimaryKey(key);
 			}
 		}
+		
+		// 销量
+		TItemXiaoliang tItemXiaoliang=tItemXiaoliangMapper.selectByPrimaryKey(itemId);
+		tItemXiaoliang.setXiaoliang(new Integer(xiaoliang));
+		tItemXiaoliangMapper.updateByPrimaryKey(tItemXiaoliang);
 	}
 }

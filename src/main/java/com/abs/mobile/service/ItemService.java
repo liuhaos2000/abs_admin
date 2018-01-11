@@ -34,6 +34,6 @@ public interface ItemService {
 	 * 保存商品信息
 	 * @return
 	 */
-    public void itemSave(String changeMod,TItem item,List<Map<String,String>> itemDist1,List<Map<String,String>> itemPist1,String itemId);
+    public void itemSave(String changeMod,TItem item,List<Map<String,String>> itemDist1,List<Map<String,String>> itemPist1,String itemId,String xiaoliang);
 
 }

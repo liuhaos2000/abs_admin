@@ -11,7 +11,8 @@ public class ObjUtil {
     		return obj.toString();
     	}else if(obj instanceof BigDecimal){
     		return obj.toString();
+    	} else{
+    		return obj.toString();
     	}
-		return null;
 	}
 }

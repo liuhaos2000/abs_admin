@@ -110,6 +110,8 @@
 				</select> 
 				<label>表示顺序:</label> <input type="text"
 					id="shouhouMiaoshu" name="shouhouMiaoshu" size="3" maxlength="3" />
+				<label>销量:</label> <input type="text"
+					id="xiaoliang" class="easyui-numberbox" precision="0" size="5" maxlength="5" />
 			</div>
 			<div class="fitem">
 				<label>发货地:</label> <select class="easyui-combobox" id="fromArea" name="fromArea"
@@ -309,6 +311,15 @@ var mod;
 				return '上架';
 			}
 		}
+		function format3(value, rowData, rowIndex) {
+			if (value == '1') {
+				return '转发图';
+			} else if (value == '2') {
+				return '滚动图';
+			}else if (value == '3') {
+				return '购物车图';
+			}
+		}
 		// 一栏的 新建按钮
 		function addItem() {
 			editItem("1")
@@ -364,6 +375,7 @@ var mod;
 			$.post(url, data, function(result) {
 				if (result.successful) {
 					var item = result.data.tItem;
+					var tItemXiaoliang = result.data.tItemXiaoliang;
 					if(mod=="1"){
 						$('#mode').text("新建");
 					}else{
@@ -386,6 +398,7 @@ var mod;
 					$('#frendText').val(item.frendText);
 					$('#parm').val(item.parm);
 					$('#fuText').val(item.fuText);
+					$('#xiaoliang').numberbox('setValue',tItemXiaoliang.xiaoliang);
 					
 				} else {
 					$.messager.show({
@@ -424,7 +437,7 @@ var mod;
 				      		{field:'lv00_lirun',title:'顶级利润',width:20},
 				      		{field:'lv01_lirun',title:'一级利润',width:20},
 				      		{field:'lv02_lirun',title:'二级利润',width:20},
-				      		{field:'del_flg',title:'上下架',width:20}
+				      		{field:'del_flg',title:'上下架',width:20,formatter:format2}
 				          ]],
 				    toolbar: [{
 				      		iconCls: 'icon-reload',
@@ -462,7 +475,7 @@ var mod;
 			    columns:[[
 				      	{field:'picture_id',hidden:'true',title:'ID',width:20},
 			      		{field:'updFlg',title:'操作',width:20},
-			      		{field:'picture_type',title:'图片类型',width:20},
+			      		{field:'picture_type',title:'图片类型',width:20,formatter:format3},
 			      		{field:'picture_text',title:'显示顺序',width:20},
 			      		{field:'path',title:'图片显示',formatter:function(value,row,index){
 			      	    	if('' != value && null != value)
@@ -662,11 +675,11 @@ function pictureDlt(){
 }
 		
 function saveItem(){
+	alert($('#xiaoliang').numberbox('getValue'));
 	var changeMod=mod;
 	var itemData = $("#item_form").serializeObject();
 	// fu文本
 	var futext = encodeURI($('#fuText').val());
-	alert($('#fuText').val());
 	//itemData = decodeURIComponent(itemData,true);
 	//alert(itemData);
 	//itemData = decodeURIComponent(itemData,true);
@@ -683,8 +696,10 @@ function saveItem(){
 	var rows = $('#list_dg').datagrid('getSelections');
 	
 	
+	
 	var url = UrlConfig.itemSave;
 	var data = {changeMod:changeMod,itemData:JSON.stringify(itemData),
+			xiaoliang:$('#xiaoliang').numberbox('getValue'),
 			futext:futext,
 			itemDetailData:itemDetailData,
 			itemPictureData:itemPictureData,
@@ -722,201 +737,7 @@ function saveItem(){
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		//=============================
-		// 物流窗口的 输入物流信息并且保存 
-		function saveOrderWuliu() {
 
-			if ($('#wuliuGongsi').val() == '') {
-				$.messager.show({
-					title : '操作结果',
-					msg : '公司输入为空'
-				});
-				return false;
-			}
-			if ($.trim($('#wuliuNo').val()).length == 0) {
-				$.messager.show({
-					title : '操作结果',
-					msg : '物流单号输入为空'
-				});
-				return false;
-			}
-
-			var url = UrlConfig.wuliuSave;
-			var rows = $('#list_dg').datagrid('getSelections');
-			var list = new Array();
-
-			for (var i = 0; i < rows.length; i++) {
-				list.push({
-					orderId : rows[i].order_id,
-					itemId : rows[i].item_id,
-					itemGuige : rows[i].item_guige,
-					itemYanse : rows[i].item_yanse,
-					tuihuoFlg : rows[i].tuihuo_flg
-				})
-			}
-			if (list.length == 0) {
-				$.messager.show({
-					title : '错误提示',
-					msg : '没有选择订单！',
-					showType : 'fade',
-					style : {
-						right : '',
-						bottom : ''
-					}
-				});
-				return;
-			}
-
-			var orderItems = JSON.stringify(list);
-
-			var data = {
-				wuliuGongsi : $('#wuliuGongsi').val(),
-				wuliuNo : $.trim($('#wuliuNo').val()),
-				orderItems : orderItems
-			};
-
-			$.post(url, data, function(result) {
-				if (result.successful) {
-					$('#send_item_dialog').dialog('close');
-					$('#list_dg').datagrid('reload', getSearchParm());
-					$.messager.show({
-						title : '操作结果',
-						msg : '操作成功！'
-					});
-				} else {
-					$.messager.show({
-						title : '操作结果',
-						msg : '保存失败！'
-					});
-				}
-			}, 'json');
-		}
-
-		// 一览上的退货按钮
-		function backItem() {
-			// Check
-			var ids = [];
-			var rows = $('#list_dg').datagrid('getSelections');
-			if (rows.length == 0) {
-				$.messager.show({
-					title : '错误提示',
-					msg : '请选择数据！',
-					showType : 'fade',
-					style : {
-						right : '',
-						bottom : ''
-					}
-				});
-				return;
-			}
-			if (rows.length > 1) {
-				$.messager.show({
-					title : '错误提示',
-					msg : '只能选择单条数据一件一件退货！',
-					showType : 'fade',
-					style : {
-						right : '',
-						bottom : ''
-					}
-				});
-				return;
-			}
-			var wkOrderId = rows[0].order_id;
-			for (var i = 0; i < rows.length; i++) {
-				// ids.push(rows[i].order_id);
-				// 非退货数据需要再check
-				if (rows[i].tuihuo_flg != '1') {
-					// 已经付款，已经发货，已经收货，可走退货流程
-					if (rows[i].sub_status != '2' && rows[i].sub_status != '3'
-							&& rows[i].sub_status != '4') {
-						$.messager.show({
-							title : '错误提示',
-							msg : '选择的订单状态不正确！',
-							showType : 'fade',
-							style : {
-								right : '',
-								bottom : ''
-							}
-						});
-						return;
-					}
-				} else {
-					//退货数据可以更新，直接跳过
-				}
-
-			}
-
-			$('#back_item_dialog').dialog('open').dialog('setTitle', '退货');
-			$('#back_item_form').form('clear');
-
-			$('#oldbackItemPrice').val(rows[0].price);
-			$('#oldcost').val(rows[0].cost);
-			$('#oldlv00_lirun').val(rows[0].lv00_lirun);
-			$('#oldlv01_lirun').val(rows[0].lv01_lirun);
-			$('#oldlv02_lirun').val(rows[0].lv02_lirun);
-			$('#backItemWuliuGongsi').combobox('select', rows[0].gongsi_id);
-			$('#backItemWuliuNo').val(rows[0].wuliu_code);
-
-		}
-		// 退货窗口的保存按钮
-		function saveBackItem() {
-			var url = UrlConfig.backItemSave;
-			var rows = $('#list_dg').datagrid('getSelections');
-			var data = {
-				orderId : rows[0].order_id,
-				itemId : rows[0].item_id,
-				itemGuige : rows[0].item_guige,
-				itemYanse : rows[0].item_yanse,
-				tuihuoFlg : rows[0].tuihuo_flg,
-
-				price : $('#backItemPrice').val(),
-				cost : $('#cost').val(),
-				lv00Lirun : $('#lv00_lirun').val(),
-				lv01Lirun : $('#lv01_lirun').val(),
-				lv02Lirun : $('#lv02_lirun').val(),
-
-				gongsiId : $('#backItemWuliuGongsi').val(),
-				wuliuCode : $.trim($('#backItemWuliuNo').val())
-			};
-			$.post(url, data, function(result) {
-				if (result.successful) {
-					$('#back_item_dialog').dialog('close');
-					$('#list_dg').datagrid('reload', getSearchParm());
-					$.messager.show({
-						title : '操作结果',
-						msg : '操作成功！'
-					});
-				} else {
-					$.messager.show({
-						title : '操作结果',
-						msg : '保存失败！'
-					});
-				}
-			}, 'json');
-		}
-		//辅助方法
-		function fuzhuAllBack() {
-			$('#backItemPrice').val($('#oldbackItemPrice').val());
-			$('#cost').val($('#oldcost').val());
-			$('#lv00_lirun').val($('#oldlv00_lirun').val());
-			$('#lv01_lirun').val($('#oldlv01_lirun').val());
-			$('#lv02_lirun').val($('#oldlv02_lirun').val());
-
-		}
-		function fuzhuPingjun() {
-
-		}
-		function fuzhuZiyou() {
-
-		}
 	</script>
 
 </body>

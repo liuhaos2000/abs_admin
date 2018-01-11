@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.abs.mobile.dao.TItemDetailMapper;
 import com.abs.mobile.dao.TItemMapper;
+import com.abs.mobile.dao.TItemXiaoliangMapper;
 import com.abs.mobile.domain.TItem;
+import com.abs.mobile.domain.TItemXiaoliang;
 import com.abs.mobile.service.ItemService;
 import com.abs.mobile.service.SessionService;
 
@@ -38,6 +40,8 @@ public class ItemController extends BaseController {
     private ItemService itemService;
     @Resource
     private TItemMapper iItemMapper;
+    @Resource
+    private TItemXiaoliangMapper iItemXiaoliangMapper;
     @Resource
     private TItemDetailMapper tItemDetailMapper;
     @Resource
@@ -77,7 +81,9 @@ public class ItemController extends BaseController {
         Result result = new Result();
         Map<String, Object> data = new HashMap<String, Object>();
         TItem tItem = iItemMapper.selectByPrimaryKey(itemId);
+        TItemXiaoliang tItemXiaoliang = iItemXiaoliangMapper.selectByPrimaryKey(itemId);
         data.put("tItem", tItem);
+        data.put("tItemXiaoliang", tItemXiaoliang);
         result.setData(data);
         return result;
     }
@@ -145,7 +151,8 @@ public class ItemController extends BaseController {
     		String futext,
     		String itemDetailData,
     		String itemPictureData,
-    		String itemId
+    		String itemId,
+    		String xiaoliang
     		){
     	
     	JSONObject jsonObject=JSONObject.fromObject(itemData);
@@ -165,7 +172,7 @@ public class ItemController extends BaseController {
         Result result = new Result();
         Map<String, Object> data = new HashMap<String, Object>();
         // service
-        itemService.itemSave(changeMod, item, itemDist1, itemPlist1, itemId);
+        itemService.itemSave(changeMod, item, itemDist1, itemPlist1, itemId,xiaoliang);
         
 //        TItem tItem = iItemMapper.selectByPrimaryKey(itemId);
 //        data.put("tItem", tItem);
