@@ -675,7 +675,7 @@ function pictureDlt(){
 }
 		
 function saveItem(){
-	alert($('#xiaoliang').numberbox('getValue'));
+	//alert($('#xiaoliang').numberbox('getValue'));
 	var changeMod=mod;
 	var itemData = $("#item_form").serializeObject();
 	// fu文本
