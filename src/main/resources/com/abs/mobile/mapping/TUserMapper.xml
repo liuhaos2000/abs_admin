@@ -241,7 +241,37 @@
         where lever in ('01','00','02')
         and substring(open_id,1,3)!='o__'
   </select>
-  
-  
+  <!-- 获取用户列表 -->
+  <select id="getShopuserList" resultType="map"> 
+        select 
+    		 t1.open_id, t1.nickname, t1.weixin_sex, t1.city, t1.province, t1.country, t1.weixin_image_url, t1.jifen, 
+             t1.area_id, t1.lever, t1.parent, t1.refresh_token, t1.del_flg, t1.c_date, t1.c_user, t1.u_date, t1.u_user
+    		,ta.nickname as parent_nickname
+        from t_user t1
+        LEFT OUTER JOIN (
+			SELECT 
+				ta1.open_id,
+				ta1.nickname
+			FROM
+				T_USER ta1
+			) ta  on ta.open_id=t1.parent
+        
+        <if test="param1.searchParentNickname != null and param1.searchParentNickname != ''">
+        	INNER JOIN (
+				SELECT t11.open_id as parent_openid 
+					from t_user t11 
+				where t11.nickname like CONCAT('%',#{param1.searchParentNickname},'%')
+					) t2 on t1.parent=t2.parent_openid or t1.open_id=t2.parent_openid
+        </if>
+        
+        where 1=1
+            <if test="param1.searchNickname != null and param1.searchNickname != ''">
+                 AND t1.nickname like CONCAT('%',#{param1.searchNickname},'%')
+            </if>
+            <if test="param1.searchLever != null and param1.searchLever != ''">
+                 AND t1.lever =#{param1.searchLever}
+            </if>
+
+    </select>
   
 </mapper>

@@ -39,9 +39,7 @@ public class AbsConstMap {
 	    }
 	};
 	public final static Map<String, String> BAOYOU_FLG = new TreeMap<String, String>() {
-
 		private static final long serialVersionUID = -8500037348082745026L;
-
 		{
 	        put("1", "包邮");
 	        put("0", "不包邮");
@@ -50,14 +48,23 @@ public class AbsConstMap {
 	};
 	
 	public final static Map<String, String> PICTURE_TYPE = new TreeMap<String, String>() {
-
 		private static final long serialVersionUID = 8092490886491152324L;
-
 		{
 	        put("1", "转发图");
 	        put("2", "滚动图");
 	        put("3", "购物车图");
 
+	    }
+	};
+	
+	public final static Map<String, String> LEVER_ID = new TreeMap<String, String>() {
+		private static final long serialVersionUID = -8149174408079035632L;
+		{
+	        put("00", "顶级");
+	        put("01", "一级");
+	        put("02", "二级");
+	        put("98", "申请");
+	        put("99", "一般");
 	    }
 	};
 }

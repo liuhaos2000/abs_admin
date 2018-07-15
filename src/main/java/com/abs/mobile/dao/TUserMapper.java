@@ -3,6 +3,9 @@ package com.abs.mobile.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.buzheng.demo.esm.common.mybatis.PageInfo;
+import org.springframework.data.domain.Page;
+
 import com.abs.mobile.domain.TUser;
 
 public interface TUserMapper {
@@ -22,4 +25,8 @@ public interface TUserMapper {
      * 选取所有VIP用户,下拉框用
      */
     List<Map<String, String>> getVipUserList();
+    /**
+     * List用
+     */
+    Page<Map<String, String>> getShopuserList(Map<String, Object> pMap,PageInfo pageInfo);
 }

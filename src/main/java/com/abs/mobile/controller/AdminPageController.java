@@ -80,4 +80,11 @@ public class AdminPageController {
     	
         return "item/item";
     }
+    
+	@RequestMapping("/shopuser")
+	public String shopuser(ModelMap map) {
+        map.put("leverMap", AbsConstMap.LEVER_ID);
+    	map.put("vipUserList",tUserMapper.getVipUserList());
+		return "shopuser/shopuser";
+	}
 }
